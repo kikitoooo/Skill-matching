@@ -48,11 +48,6 @@
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.button:hover .login_icon {
-  width: calc(1.25rem + 10%);
-  height: calc(1.25rem + 10%);
-}
-
 .content_button {
   display: flex;
   gap: 0.75rem;

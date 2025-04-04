@@ -1,3 +1,9 @@
+import { HeroSection } from "./ui/HeroSection";
+
 export const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <main>
+      <HeroSection />
+    </main>
+  );
 };
