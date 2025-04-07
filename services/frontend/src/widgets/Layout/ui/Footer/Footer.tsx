@@ -12,13 +12,13 @@ export const Footer = () => {
               <LogoIcon className={styles.logo_icon} />
             </Link>
           </div>
-          <div className={styles.contacts_container}>
+          <address className={styles.contacts_container}>
             <h4 className={styles.contacts}>Контакты</h4>
             <p className={styles.heading_mail}>
               Email:{" "}
               <span className={styles.mail_contacts}>webmaster@gazprom.ru</span>
             </p>
-          </div>
+          </address>
         </div>
         <div className={styles.rights_container}>
           <p className={styles.rights_description}>

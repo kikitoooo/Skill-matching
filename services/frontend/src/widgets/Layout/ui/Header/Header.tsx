@@ -44,14 +44,20 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.header_container}>
-        <div className={styles.nav_container}>
-          <Link className={styles.nav_link} to={`/`}>
-            <span className={styles.nav_link_content}>Главная</span>
-          </Link>
-          <Link className={styles.nav_link} to={`/analysis`}>
-            <span className={styles.nav_link_content}>Перейти к анализу</span>
-          </Link>
-        </div>
+        <nav className={styles.nav_container}>
+          <ul className={styles.nav_list}>
+            <li className={styles.nav_item}>
+              <Link className={styles.nav_link} to={`/`}>
+                Главная
+              </Link>
+            </li>
+            <li className={styles.nav_item}>
+              <Link className={styles.nav_link} to={`/analysis`}>
+                Перейти к анализу
+              </Link>
+            </li>
+          </ul>
+        </nav>
         <div className={styles.logo_container}>
           <Link className={styles.logo_link} to={"/"}>
             <LogoIcon className={styles.logo} />
@@ -92,45 +98,64 @@ export const Header = () => {
             <IconBars />
           )}
         </div>
-        <div
+        <nav
           className={clsx(
             styles.mobile_menu,
             isMenuOpen && styles.open_mobile_menu
           )}
         >
-          <Link className={styles.nav_link} to={`/`}>
-            <span className={styles.nav_link_content}>Главная</span>
-          </Link>
-          <Link className={styles.nav_link} to={`/analysis`}>
-            <span className={styles.nav_link_content}>Перейти к анализу</span>
-          </Link>
-          <Link
-            className={` ${
-              isAuthenticated ? styles.to_profile_link : styles.for_unauth_user
-            }`}
-            to={`/profile`}
-          >
-            <ProfileIcon
-              className={clsx(
-                styles.profile_icon,
-                ` ${
+          <ul className={styles.nav_list}>
+            <li className={styles.nav_item}>
+              <Link className={styles.nav_link} to={`/`}>
+                Главная
+              </Link>
+            </li>
+            <li className={styles.nav_item}>
+              <Link className={styles.nav_link} to={`/analysis`}>
+                Перейти к анализу
+              </Link>
+            </li>
+            <li
+              className={` ${
+                isAuthenticated ? styles.nav_item : styles.for_unauth_user
+              }`}
+            >
+              <Link
+                className={` ${
                   isAuthenticated
-                    ? styles.for_auth_user
+                    ? styles.to_profile_link
                     : styles.for_unauth_user
-                }`
+                }`}
+                to={`/profile`}
+              >
+                <ProfileIcon
+                  className={clsx(
+                    styles.profile_icon,
+                    ` ${
+                      isAuthenticated
+                        ? styles.for_auth_user
+                        : styles.for_unauth_user
+                    }`
+                  )}
+                />
+              </Link>
+            </li>
+            <li>
+              {!isAuthenticated ? (
+                <LoginButton
+                  className={styles.login_logout_button}
+                  title="Войти"
+                />
+              ) : (
+                <LogOutButton
+                  handleLogout={handleLogout}
+                  className={styles.login_logout_button}
+                  title="Выйти"
+                />
               )}
-            />
-          </Link>
-          {!isAuthenticated ? (
-            <LoginButton className={styles.login_logout_button} title="Войти" />
-          ) : (
-            <LogOutButton
-              handleLogout={handleLogout}
-              className={styles.login_logout_button}
-              title="Выйти"
-            />
-          )}
-        </div>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   );

@@ -12,14 +12,13 @@ export const LoginButton: React.FC<{
   const navigate = useNavigate();
   const location = useLocation();
 
-  const openLoginModal = () => {
-    const { pathname, search } = location; // Извлекаем только нужные данные
-    navigate("/login", { state: { background: { pathname, search } } });
+  const redirectToLogin = () => {
+    navigate("/login", { state: { from: location.pathname } });
   };
 
   return (
     <button
-      onClick={openLoginModal}
+      onClick={redirectToLogin}
       className={clsx(className, styles.button)}
       type={type}
     >

@@ -1,0 +1,159 @@
+.workflow_section {
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.workflow_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.heading_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.heading {
+  font-size: clamp(1.25rem, 1.1234rem + 0.6329vw, 1.875rem);
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.4;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.main_heading {
+  font-size: clamp(1.875rem, 1.5712rem + 1.519vw, 3.375rem);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.paragraph {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(1rem, 0.9494rem + 0.2532vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.heading_paragraph {
+  text-align: center;
+  font-size: clamp(1.125rem, 1.0491rem + 0.3797vw, 1.5rem);
+}
+
+.cards_container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(22 34 151 / var(--tw-border-opacity, 1));
+}
+
+.card_description {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card_heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.arrow_link {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: rgb(22 34 151 / var(--tw-border-opacity, 1));
+  font-size: clamp(1rem, 0.9494rem + 0.2532vw, 1.25rem);
+  transition: all;
+}
+
+.arrow {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.arrow_link:hover {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-bottom: 1px solid rgb(184 70 232 / var(--tw-border-opacity, 1));
+  color: rgb(184 70 232 / var(--tw-border-opacity, 1));
+}
+
+.arrow_link:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-bottom: 1px solid rgb(184 70 232 / var(--tw-border-opacity, 1));
+  color: rgb(184 70 232 / var(--tw-border-opacity, 1));
+}
+
+.image_container {
+  position: relative;
+  display: flex;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+    z-index: 1;
+  }
+}
+
+.image {
+  position: relative;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .workflow_section {
+    padding: 4rem 0rem;
+  }
+  .workflow_container {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .cards_container {
+    flex-direction: row;
+  }
+  .card {
+    flex: 1;
+  }
+  .card_description {
+    flex: 1;
+  }
+  .card_heading {
+    flex: 1;
+  }
+  .image_container {
+    flex: 1;
+    aspect-ratio: 1/1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    flex-direction: row;
+  }
+  .image_container {
+    aspect-ratio: initial;
+  }
+}

@@ -10,7 +10,7 @@ export const HeroSection = () => {
     navigate("/analysis", { state: { from: location.pathname } });
   };
   return (
-    <div className={styles.hero_container}>
+    <section className={styles.hero_section}>
       <div className={styles.promo_block}>
         <div className={styles.promo_block_content}>
           <div className={styles.heading_container}>
@@ -31,6 +31,6 @@ export const HeroSection = () => {
         </div>
       </div>
       <div></div>
-    </div>
+    </section>
   );
 };
