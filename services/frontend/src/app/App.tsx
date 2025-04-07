@@ -7,6 +7,7 @@ import { checkUserAuth, getUser } from "../features/slices/userSlice";
 import { fetchResumes } from "../features/slices/resumeSlice";
 import { Layout } from "../widgets/Layout/Layout";
 import { HomePage } from "../pages/HomePage";
+import { AnalysisPage } from "../pages/AnalysisPage";
 export const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export const App = () => {
         <Layout>
           <Routes location={backgroundLocation || location}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/analysis" element={<AnalysisPage />} />
           </Routes>
         </Layout>
       </div>
