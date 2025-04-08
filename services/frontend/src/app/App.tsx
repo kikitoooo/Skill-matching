@@ -8,6 +8,8 @@ import { fetchResumes } from "../features/slices/resumeSlice";
 import { Layout } from "../widgets/Layout/Layout";
 import { HomePage } from "../pages/HomePage";
 import { AnalysisPage } from "../pages/AnalysisPage";
+import { LoginPage } from "../pages/LoginPage";
+import {RegistrationPage} from '../pages/RegistrationPage'
 export const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,6 +32,8 @@ export const App = () => {
           <Routes location={backgroundLocation || location}>
             <Route path="/" element={<HomePage />} />
             <Route path="/analysis" element={<AnalysisPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegistrationPage />} />
           </Routes>
         </Layout>
       </div>
