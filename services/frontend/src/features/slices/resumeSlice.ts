@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getResumesApi } from "../../entities/api/api";
+import { getResumesApi, uploadResumeApi } from "../../entities/api/api";
 import { TResume } from "../../entities/models/types";
 
 type TResumesState = {
@@ -13,6 +13,14 @@ const initialState: TResumesState = {
   isLoading: true,
   error: null,
 };
+
+export const analyzeResume = createAsyncThunk(
+  "resumes/analyzeResume",
+  async (file: File) => {
+    const result = await uploadResumeApi(file);
+    return result;
+  }
+);
 
 export const fetchResumes = createAsyncThunk(
   "resumes/getAllResumes",
@@ -39,6 +47,18 @@ const resumesSlice = createSlice({
       .addCase(fetchResumes.fulfilled, (state, action) => {
         state.resumes = action.payload;
         state.isLoading = false;
+      })
+      .addCase(analyzeResume.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(analyzeResume.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message || "Ошибка анализа резюме";
+      })
+      .addCase(analyzeResume.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.resumes.push(action.payload);
       });
   },
 });

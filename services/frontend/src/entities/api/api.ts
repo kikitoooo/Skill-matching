@@ -165,9 +165,28 @@ export const logoutApi = () =>
     deleteCookie("accessToken");
   });
 
+type TResumeResponse = TServerResponse<{
+  resume: TResume;
+}>;
+
 type TResumesResponse = TServerResponse<{
   resumes: TResume[];
 }>;
+
+export const uploadResumeApi = async (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${URL}/api/resumes/analyze/`, {
+    method: "POST",
+    body: formData,
+  });
+
+  return checkResponse<TResumeResponse>(response).then((data) => {
+    if (data?.success) return data.resume;
+    return Promise.reject(data);
+  });
+};
 
 export const getResumesApi = () =>
   fetch(`${URL}/api/resumes/`)
