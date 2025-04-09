@@ -60,7 +60,7 @@ export const RegistrationPage = () => {
   };
 
   return (
-    <section className={styles.container}>
+    <main className={styles.container}>
       <h2 className={styles.heading}>Регистрация</h2>
 
       {isLoading && <LoadingOverlay />}
@@ -123,6 +123,6 @@ export const RegistrationPage = () => {
           Войти
         </span>
       </div>
-    </section>
+    </main>
   );
 };

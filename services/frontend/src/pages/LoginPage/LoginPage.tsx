@@ -58,7 +58,7 @@ export const LoginPage = () => {
   };
 
   return (
-    <section className={styles.container}>
+    <main className={styles.container}>
       <h2 className={styles.heading}>Вход</h2>
 
       {isLoading && <LoadingOverlay />}
@@ -108,6 +108,6 @@ export const LoginPage = () => {
           Зарегистрироваться
         </span>
       </div>
-    </section>
+    </main>
   );
 };

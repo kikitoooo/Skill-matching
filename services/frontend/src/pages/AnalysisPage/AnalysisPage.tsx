@@ -51,47 +51,49 @@ export const AnalysisPage = () => {
   };
 
   return (
-    <section className={styles.analysis_section}>
-      <div className={styles.wrapper}>
-        <h2 className={styles.heading}>Анализ резюме</h2>
+    <main>
+      <section className={styles.analysis_section}>
+        <div className={styles.wrapper}>
+          <h2 className={styles.heading}>Анализ резюме</h2>
 
-        <UploadZone
-          isDragging={isDragging}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onFileChange={handleFileChange}
-          inputRef={inputRef}
-          triggerFileSelect={() => inputRef.current?.click()}
-        />
-
-        {error && <p className={styles.error}>{error}</p>}
-
-        {selectedFile && (
-          <SelectedFile file={selectedFile} onUpload={handleUpload} />
-        )}
-
-        {uploads.map((upload) => (
-          <ProgressBar
-            key={upload.id}
-            name={upload.name}
-            progress={upload.progress}
-            status={upload.status}
-            isVisible={upload.isVisible}
+          <UploadZone
+            isDragging={isDragging}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onFileChange={handleFileChange}
+            inputRef={inputRef}
+            triggerFileSelect={() => inputRef.current?.click()}
           />
-        ))}
-        <div className={styles.notifications}>
-          {notifications.map((n) => (
-            <Notification
-              key={n.name}
-              name={n.name}
-              message={n.message}
-              type={n.type}
-              isVisible={n.isVisible}
+
+          {error && <p className={styles.error}>{error}</p>}
+
+          {selectedFile && (
+            <SelectedFile file={selectedFile} onUpload={handleUpload} />
+          )}
+
+          {uploads.map((upload) => (
+            <ProgressBar
+              key={upload.id}
+              name={upload.name}
+              progress={upload.progress}
+              status={upload.status}
+              isVisible={upload.isVisible}
             />
           ))}
+          <div className={styles.notifications}>
+            {notifications.map((n) => (
+              <Notification
+                key={n.name}
+                name={n.name}
+                message={n.message}
+                type={n.type}
+                isVisible={n.isVisible}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };

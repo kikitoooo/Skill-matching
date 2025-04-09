@@ -9,7 +9,8 @@ import { Layout } from "../widgets/Layout/Layout";
 import { HomePage } from "../pages/HomePage";
 import { AnalysisPage } from "../pages/AnalysisPage";
 import { LoginPage } from "../pages/LoginPage";
-import {RegistrationPage} from '../pages/RegistrationPage'
+import { RegistrationPage } from "../pages/RegistrationPage";
+import { ProtectedRoute } from "./ProtectedRoute";
 export const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,9 +32,30 @@ export const App = () => {
         <Layout>
           <Routes location={backgroundLocation || location}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/analysis" element={<AnalysisPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegistrationPage />} />
+            <Route
+              path="/analysis"
+              element={
+                <ProtectedRoute>
+                  <AnalysisPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <ProtectedRoute onlyUnAuth>
+                  <LoginPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <ProtectedRoute onlyUnAuth>
+                  <RegistrationPage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Layout>
       </div>
