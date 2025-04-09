@@ -1,13 +1,14 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { MainButton } from "../../shared/ui/MainButton";
-import styles from "./Login.module.scss";
 import * as yup from "yup";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "../../features/store";
 import { loginUser } from "../../features/slices/userSlice";
-import { useState } from "react";
+import { MainButton } from "../../shared/ui/MainButton";
 import { LoadingOverlay } from "../../shared/ui/LoadingOverlay";
+import styles from "./Login.module.scss";
+import { TLoginData } from "../../entities/models/types";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,10 +18,7 @@ export const LoginPage = () => {
   const [error, setError] = useState("");
 
   const authFormSchema = yup.object().shape({
-    email: yup
-      .string()
-      .required("Введите email")
-      .email("Некорректный email"),
+    email: yup.string().required("Введите email").email("Некорректный email"),
     password: yup
       .string()
       .required("Введите пароль")
@@ -41,7 +39,7 @@ export const LoginPage = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: TLoginData) => {
     try {
       setError("");
       await dispatch(loginUser(data)).unwrap();
@@ -60,8 +58,8 @@ export const LoginPage = () => {
   };
 
   return (
-    <main className={styles.container}>
-      <h2>Вход</h2>
+    <section className={styles.container}>
+      <h2 className={styles.heading}>Вход</h2>
 
       {isLoading && <LoadingOverlay />}
 
@@ -110,6 +108,6 @@ export const LoginPage = () => {
           Зарегистрироваться
         </span>
       </div>
-    </main>
+    </section>
   );
 };

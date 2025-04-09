@@ -1,4 +1,4 @@
-import { TResume, TUser } from "../models/types";
+import { TLoginData, TRegisterData, TResume, TUser } from "../models/types";
 import { deleteCookie, getCookie, setCookie } from "./cookie";
 
 const URL = "http://localhost:8000/";
@@ -56,14 +56,6 @@ export const fetchWithRefresh = async <T>(
   }
 };
 
-export type TRegisterData = {
-  email: string;
-  username: string;
-  password: string;
-  image?: string;
-  resume?: TResume[];
-};
-
 type TAuthResponse = TServerResponse<{
   refreshToken: string;
   accessToken: string;
@@ -83,11 +75,6 @@ export const registerUserApi = (data: TRegisterData) =>
       if (data?.success) return data;
       return Promise.reject(data);
     });
-
-export type TLoginData = {
-  email: string;
-  password: string;
-};
 
 export const loginUserApi = (data: TLoginData) =>
   fetch(`${URL}/api/login/`, {

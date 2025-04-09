@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { TUser } from "../../entities/models/types";
+import { TLoginData, TUser } from "../../entities/models/types";
 import { deleteCookie, setCookie } from "../../entities/api/cookie";
 import {
   getUserApi,
   loginUserApi,
   logoutApi,
   registerUserApi,
-  TLoginData,
   updateUserApi,
 } from "../../entities/api/api";
 
@@ -19,7 +18,7 @@ interface UserState {
 }
 
 interface TRegisterData {
-  username: string;
+  name: string;
   email: string;
   password: string;
 }
@@ -29,7 +28,7 @@ const initialState: UserState = {
   isAuthenticated: false,
   user: {
     email: "",
-    username: " ",
+    name: " ",
   },
   isLoading: false,
   error: null,
@@ -125,7 +124,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = {
           email: "",
-          username: "",
+          name: "",
         };
         state.error = null;
         state.isAuthenticated = false;

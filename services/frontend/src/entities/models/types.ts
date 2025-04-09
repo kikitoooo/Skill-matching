@@ -12,7 +12,7 @@ export type TResume = {
 
 export type TUser = {
   email: string;
-  username: string;
+  name: string;
   image?: string;
   resumes?: TResume[];
 };
@@ -22,9 +22,22 @@ export interface IAppState {
   loading: boolean;
 }
 
+export type TLoginData = {
+  email: string;
+  password: string;
+};
+
+export type TRegisterData = {
+  email: string;
+  name: string;
+  password: string;
+  image?: string;
+  resume?: TResume[];
+};
+
 export type PageUIProps = {
   errors: {
-    username?: string;
+    name?: string;
     email: string;
     password: string;
     image?: string;

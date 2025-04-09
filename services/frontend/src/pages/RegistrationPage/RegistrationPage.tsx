@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "../../features/store";
 import { useState } from "react";
 import { registerUser } from "../../features/slices/userSlice";
 import { LoadingOverlay } from "../../shared/ui/LoadingOverlay";
+import { TRegisterData } from "../../entities/models/types";
 
 export const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -17,10 +18,7 @@ export const RegistrationPage = () => {
   const [error, setError] = useState("");
 
   const regFormSchema = yup.object().shape({
-    email: yup
-      .string()
-      .required("Введите email")
-      .email("Некорректный email"),
+    email: yup.string().required("Введите email").email("Некорректный email"),
     name: yup
       .string()
       .required("Введите имя")
@@ -45,12 +43,12 @@ export const RegistrationPage = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: TRegisterData) => {
     setError("");
     const { name, email, password } = data;
 
     try {
-      await dispatch(registerUser({ username: name, email, password })).unwrap();
+      await dispatch(registerUser({ name: name, email, password })).unwrap();
       navigate("/", { state: { from: location.pathname } });
     } catch (err) {
       setError("Ошибка при регистрации. Попробуйте снова.");
@@ -62,8 +60,8 @@ export const RegistrationPage = () => {
   };
 
   return (
-    <main className={styles.container}>
-      <h2>Регистрация</h2>
+    <section className={styles.container}>
+      <h2 className={styles.heading}>Регистрация</h2>
 
       {isLoading && <LoadingOverlay />}
 
@@ -125,6 +123,6 @@ export const RegistrationPage = () => {
           Войти
         </span>
       </div>
-    </main>
+    </section>
   );
 };

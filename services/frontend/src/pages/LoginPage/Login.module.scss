@@ -1,107 +1,119 @@
 .container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 50vh;
-    justify-content: center;
-  }
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 50vh;
+  justify-content: center;
+}
 
-  .title {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    color: #333;
-    text-align: center;
+.heading {
+  font-size: clamp(1.25rem, 1.1234rem + 0.6329vw, 2rem);
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  width: fit-content;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #333;
+  text-align: center;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: clamp(0.875rem, 0.8244rem + 0.2532vw, 1.125rem);
+  color: rgba(22, 34, 151, 0.9);
+  font-weight: 400;
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #8489b9;
+  border-radius: 1.125rem;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #b846e8;
   }
-  
-  .form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+}
+
+.error {
+  color: #e53e3e;
+  font-size: clamp(0.75rem, 0.6741rem + 0.3797vw, 1.125rem);
+  margin-top: 0.25rem;
+}
+
+.forgotLink {
+  color: #6b46c1;
+  font-size: 0.9rem;
+  text-align: left;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #553c9a;
+    text-decoration: underline;
   }
-  
-  .inputGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+}
+
+.buttonContainer {
+  margin-top: -0.5rem;
+}
+
+.mainButton {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 6px;
+  padding: 0.875rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+
+  &:disabled {
+    box-shadow: none;
+    animation: none;
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
   }
-  
-  .label {
-    font-size: 0.875rem;
-    color: #555;
-    font-weight: 500;
+}
+
+.registerPrompt {
+  margin-top: 1.5rem;
+  font-size: clamp(0.875rem, 0.7991rem + 0.3797vw, 1.25rem);
+  color: rgba(22, 34, 151);
+  font-weight: 400;
+  align-self: flex-start;
+}
+
+.registerLink {
+  color: rgb(21, 33, 143);
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #8d2ccd;
+    text-decoration: underline;
   }
-  
-  .input {
-    padding: 0.75rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
-    
-    &:focus {
-      outline: none;
-      border-color: #6b46c1;
-    }
-  }
-  
-  .error {
-    color: #e53e3e;
-    font-size: 0.75rem;
-    margin-top: 0.25rem;
-  }
-  
-  .forgotLink {
-    color: #6b46c1;
-    font-size: 0.9rem;
-    text-align: left;
-    text-decoration: none;
-    transition: color 0.2s;
-    
-    &:hover {
-      color: #553c9a;
-      text-decoration: underline;
-    }
-  }
-  
-  .buttonContainer {
-    margin-top: -0.5rem;
-  }
-  
-  .mainButton {
-    width: 100%;
-    margin-top: 1rem;
-    border-radius: 6px;
-    padding: 0.875rem 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s, opacity 0.2s;
-    
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-  }
-  
-  .registerPrompt {
-    margin-top: 1.5rem;
-    font-size: 0.875rem;
-    color: #555;
-    text-align: center;
-  }
-  
-  .registerLink {
-    color: #6b46c1;
-    cursor: pointer;
-    font-weight: 500;
-    transition: color 0.2s;
-    
-    &:hover {
-      color: #553c9a;
-      text-decoration: underline;
-    }
-  }
+}
