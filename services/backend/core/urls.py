@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from processing.views import CookieTokenObtainPairView, CookieTokenRefreshView, UserProfileViewSet
+from processing.views import (CookieTokenObtainPairView, CookieTokenRefreshView, UserProfileViewSet,
+                              ResumeViewSet, VacancyViewSet)
 from rest_framework.routers import DefaultRouter
 
 
@@ -25,6 +26,14 @@ router = DefaultRouter()
 router.register(r'user/me',
                 UserProfileViewSet,
                 basename='user'
+                )
+router.register(r'resume',
+                ResumeViewSet,
+                basename='resume'
+                )
+router.register(r'vacancy',
+                VacancyViewSet,
+                basename='vacancy'
                 )
 urlpatterns = [
     path('auth/token/', CookieTokenObtainPairView.as_view(), name='token_obtain_pair'),

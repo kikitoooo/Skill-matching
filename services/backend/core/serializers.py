@@ -62,7 +62,7 @@ class ResumeCreateSerializer(serializers.ModelSerializer):
             'first_name',
             'patronymic_name',
             'surname',
-            'jobs',
+            'job',
             'skills',
             'resume_file',
         ]
@@ -80,7 +80,7 @@ class ResumeSerializer(serializers.ModelSerializer):
             'first_name',
             'patronymic_name',
             'surname',
-            'jobs',
+            'job',
             'skills',
             'resume_file',
             'created_at',
