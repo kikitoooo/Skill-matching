@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from processing.views import CookieTokenObtainPairView, CookieTokenRefreshView
 
 urlpatterns = [
+    path('auth/token/', CookieTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auth/token/refresh/', CookieTokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
 ]
