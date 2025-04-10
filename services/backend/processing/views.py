@@ -1,7 +1,14 @@
 from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from core.serializers import CookieTokenRefreshSerializer
+from core.serializers import CookieTokenRefreshSerializer, CustomUserSerializer, CustomUserCreateSerializer
+from rest_framework import status, viewsets
+from rest_framework.response import Response
+from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin, \
+    RetrieveModelMixin
+from rest_framework.viewsets import GenericViewSet
+
+from .models import CustomUser
 
 
 class CookieTokenObtainPairView(TokenObtainPairView):
@@ -22,4 +29,26 @@ class CookieTokenRefreshView(TokenRefreshView):
         return super().finalize_response(request, response, *args, **kwargs)
 
     serializer_class = CookieTokenRefreshSerializer
+
+
+class UserProfileViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin,
+                         DestroyModelMixin, GenericViewSet):
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return CustomUserSerializer
+        return CustomUserCreateSerializer
+
+    def get_queryset(self):
+        queryset = CustomUser.objects.filter(username=self.request.user)
+        print(self.request.user)
+        return queryset
+
+    def create(self, request, *args, **kwargs):
+
+        serializer = CustomUserCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 # Create your views here.

@@ -27,7 +27,7 @@ class CustomUserCreateSerializer(UserCreateSerializer):
             'username',
             'first_name',
             'patronymic_name',
-            'lastname',
+            'last_name',
             'password',
         ]
 
@@ -50,7 +50,7 @@ class CustomUserSerializer(UserSerializer):
             'username',
             'first_name',
             'patronymic_name',
-            'surname',
+            'last_name',
         ]
 
 
