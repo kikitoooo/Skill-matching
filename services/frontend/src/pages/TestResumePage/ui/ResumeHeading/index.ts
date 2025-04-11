@@ -1,0 +1,1 @@
+export { ResumeHeading } from "./ResumeHeading";

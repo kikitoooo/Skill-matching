@@ -1,1 +1,0 @@
-export { SkillDiagram } from "./SkillDiagram";
