@@ -68,6 +68,7 @@ class ResumeCreateSerializer(serializers.ModelSerializer):
             'skills',
             'resume_file',
             'parsed_resume',
+            'resume_file'
         ]
         read_only_fields = ['parsed_resume']
 
@@ -102,6 +103,7 @@ class ResumeSerializer(serializers.ModelSerializer):
             'skills',
             'created_at',
             'parsed_resume',
+            'resume_file'
         ]
 
 

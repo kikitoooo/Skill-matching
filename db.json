@@ -1,0 +1,314 @@
+[
+  {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2025-04-11T11:59:20.789Z",
+      "user": 5,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "Vacancy object (1)",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2025-04-11T11:59:20.790Z",
+      "user": 5,
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "Vacancy object (2)",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2025-04-11T11:59:20.790Z",
+      "user": 5,
+      "content_type": 8,
+      "object_id": "3",
+      "object_repr": "Vacancy object (3)",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+      "action_time": "2025-04-11T17:11:39.998Z",
+      "user": 5,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "Vacancy object (4)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2025-04-11T17:16:11.760Z",
+      "user": 5,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "Vacancy object (5)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2025-04-11T17:19:49.824Z",
+      "user": 5,
+      "content_type": 8,
+      "object_id": "6",
+      "object_repr": "Vacancy object (6)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2025-04-11T17:26:25.301Z",
+      "user": 5,
+      "content_type": 8,
+      "object_id": "7",
+      "object_repr": "Vacancy object (7)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "ye26i9z0fwtd01ytsww8o97m9jsviuls",
+    "fields": {
+      "session_data": ".eJxVjDEOwyAUQ-_CXCECfEg6ds8ZEP8DJW0FUkimqncvkTK0iyX72X4z5_ctu73F1S2BXRmwy2-Gnp6xHCA8fLlXTrVs64L8qPCTNj7XEF-3s_t3kH3LfS00IfikYTSxa5SgVLJBGuXRjsZCICWkmLQhDRqn7qMcyCYcAoEy7PMF2x83qQ:1u3D24:vMaDD5HkxCCzyf43qwFlgf8GhNCIrz2wBvnv83h-1ls",
+      "expire_date": "2025-04-25T11:58:52.383Z"
+    }
+  },
+  {
+    "model": "processing.resume",
+    "pk": 1,
+    "fields": {
+      "first_name": "kate3",
+      "patronymic_name": "v",
+      "surname": "h",
+      "job": "dddd",
+      "skills": "test",
+      "resume_file": "\"test\"",
+      "parsed_resume": "1",
+      "created_at": "2025-04-10T21:18:22.541Z"
+    }
+  },
+  {
+    "model": "processing.resume",
+    "pk": 2,
+    "fields": {
+      "first_name": "kate3",
+      "patronymic_name": "v",
+      "surname": "h",
+      "job": "dddd",
+      "skills": "test1",
+      "resume_file": "\"test1\"",
+      "parsed_resume": "1",
+      "created_at": "2025-04-10T21:18:35.100Z"
+    }
+  },
+  {
+    "model": "processing.vacancy",
+    "pk": 4,
+    "fields": {
+      "name": "Аналитик данных (Data scientist, ML Engineer)",
+      "description": "Специалист, который работает с данными компании, анализирует их и разрабатывает решения на основе ИИ.\r\nСовместно с техническими аналитиками формирует технические метрики, которые зависят от бизнес-метрик.\r\nВ процессе выполнения проекта специалист:\r\nОпределяет лучший метод машинного обучения и способ его адаптации к специфике задачи\r\nРазрабатывает новые признаки (feature-engineering)\r\nРеализует общий пайплайн решения\r\nФормирует техническую часть документации проекта",
+      "required_skills": {
+        "Определения, история развития и главные тренды ИИ": "1",
+        "Процесс, стадии и методологии разработки решений на основе ИИ (Docker, Linux/Bash, Git)": "2",
+        "Статистические методы и первичный анализ данных": "2",
+        "Оценка качества работы методов ИИ": "2",
+        "Языки программирования и библиотеки (Python, С++)": "2",
+        "Методы машинного обучения": "2",
+        "Методы оптимизации": "2",
+        "Информационный поиск": "1",
+        "Рекомендательные системы ": "1",
+        "Анализ изображений и видео ": "2",
+        "Анализ естественного языка": "2",
+        "Основы глубокого обучения": "2",
+        "Глубокое обучение для анализа и генерации изображений, видео": "2",
+        "Глубокое обучение для анализа и генерации естественного языка ": "2",
+        "Обучение с подкреплением и глубокое обучение с подкреплением": "1",
+        "Работа с распределенной кластерной системой": "1",
+        "Машинное обучение на больших данных": "1",
+        "SQL базы данных (GreenPlum, Postgres, Oracle)": "1",
+        "NoSQL базы данных (Cassandra, MongoDB, ElasticSearch, Neo4J, Hbase)": "1",
+        "Массово параллельная обработка и анализ данных": "1",
+        "Hadoop, SPARK, Hive": "1",
+        "Качество и предобработка данных, подходы и инструменты": "2"
+      },
+      "created_at": "2025-04-11T17:11:39.957Z",
+      "updated_at": "2025-04-11T17:11:39.957Z"
+    }
+  },
+  {
+    "model": "processing.vacancy",
+    "pk": 5,
+    "fields": {
+      "name": "Инженер данных (Data engineer)",
+      "description": "Специалист, который отвечает за сбор, анализ, очистку и подготовку данных для последующего использования. Работает с системами хранения и анализа данных, обеспечивая их эффективное функционирование, а также поддержку систем версионирования данных.",
+      "required_skills": {
+        "Определения, история развития и главные тренды ИИ": "1",
+        "Процесс, стадии и методологии разработки решений на основе ИИ (Docker, Linux/Bash, Git)": "2",
+        "Статистические методы и первичный анализ данных": "1",
+        "Оценка качества работы методов ИИ": "1",
+        "Языки программирования и библиотеки (Python, С++)": "2",
+        "Методы машинного обучения": "2",
+        "Методы оптимизации": "1",
+        "Информационный поиск": "1",
+        "Анализ изображений и видео ": "1",
+        "Анализ естественного языка": "1",
+        "Основы глубокого обучения": "2",
+        "Глубокое обучение для анализа и генерации изображений, видео": "2",
+        "Глубокое обучение для анализа и генерации естественного языка ": "2",
+        "Массово параллельные вычисления для ускорения машинного обучения (GPU)": "1",
+        "Работа с распределенной кластерной системой": "2",
+        "Машинное обучение на больших данных": "2",
+        "Потоковая обработка данных (data streaming, event processing)": "2",
+        "SQL базы данных (GreenPlum, Postgres, Oracle)": "3",
+        "NoSQL базы данных (Cassandra, MongoDB, ElasticSearch, Neo4J, Hbase)": "3",
+        "Массово параллельная обработка и анализ данных": "2",
+        "Hadoop, SPARK, Hive": "2",
+        "Качество и предобработка данных, подходы и инструменты": "3"
+      },
+      "created_at": "2025-04-11T17:16:11.720Z",
+      "updated_at": "2025-04-11T17:16:11.720Z"
+    }
+  },
+  {
+    "model": "processing.vacancy",
+    "pk": 6,
+    "fields": {
+      "name": "Технический аналитик в ИИ (Technical analyst in AI)",
+      "description": "Специалист, который обеспечивает эффективное взаимодействие между аналитиком данных и заказчиком. Анализирует потребности бизнеса, подтверждает и уточняет проблематику, анализирует бизнес-процессы и\r\nвыявляет ключевые артефакты данных в них. Также специалист оценивает техническую реализуемость запроса, формализует техническое задание, и в дальнейшем может участвовать в документировании результатов экспериментов и итогового тестирования.",
+      "required_skills": {
+        "Определения, история развития и главные тренды ИИ": "1",
+        "Процесс, стадии и методологии разработки решений на основе ИИ (Docker, Linux/Bash, Git)": "1",
+        "Статистические методы и первичный анализ данных": "1",
+        "Оценка качества работы методов ИИ": "1",
+        "Языки программирования и библиотеки (Python, С++)": "1",
+        "Методы машинного обучения": "1",
+        "Рекомендательные системы ": "1",
+        "Анализ изображений и видео ": "1",
+        "Анализ естественного языка": "1",
+        "Основы глубокого обучения": "1",
+        "Глубокое обучение для анализа и генерации изображений, видео": "1",
+        "Глубокое обучение для анализа и генерации естественного языка ": "1",
+        "SQL базы данных (GreenPlum, Postgres, Oracle)": "1",
+        "NoSQL базы данных (Cassandra, MongoDB, ElasticSearch, Neo4J, Hbase)": "1",
+        "Качество и предобработка данных, подходы и инструменты": "1"
+      },
+      "created_at": "2025-04-11T17:19:49.782Z",
+      "updated_at": "2025-04-11T17:19:49.783Z"
+    }
+  },
+  {
+    "model": "processing.vacancy",
+    "pk": 7,
+    "fields": {
+      "name": "Менеджер в ИИ (Manager in AI)",
+      "description": "Специалист, который обеспечивает общее выполнение проекта, работу по бюджету, ресурсам, срокам.  Отвечает за конверсию и вывод решений в продуктив на организационном уровне. Также в круг его обязанностей может входить обработка пользовательских отзывов и части документирования продукта.",
+      "required_skills": {
+        "Определения, история развития и главные тренды ИИ": "1",
+        "Процесс, стадии и методологии разработки решений на основе ИИ (Docker, Linux/Bash, Git)": "1",
+        "Оценка качества работы методов ИИ": "1",
+        "Методы машинного обучения": "1",
+        "Анализ изображений и видео ": "1",
+        "Анализ естественного языка": "1",
+        "Основы глубокого обучения": "1",
+        "Глубокое обучение для анализа и генерации изображений, видео": "1",
+        "Глубокое обучение для анализа и генерации естественного языка ": "1",
+        "SQL базы данных (GreenPlum, Postgres, Oracle)": "1",
+        "NoSQL базы данных (Cassandra, MongoDB, ElasticSearch, Neo4J, Hbase)": "1",
+        "Качество и предобработка данных, подходы и инструменты": "1"
+      },
+      "created_at": "2025-04-11T17:26:25.264Z",
+      "updated_at": "2025-04-11T17:26:25.264Z"
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$YmwbrjUCyG8mWdprbthC6F$B5nKzNuV40Q/6uCZyZ7sF5c9lxqHynCZ4Y3K8rGFdmU=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kate1",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-04-10T20:41:46.767Z",
+      "email": "kate1@mail.com",
+      "email_confirmed": false,
+      "first_name": "kate",
+      "patronymic_name": "v",
+      "created_at": "2025-04-10T20:41:46.767Z",
+      "updated_at": "2025-04-10T20:41:46.768Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$iLE6HUXMfm3ziIpghhTvf2$vTyVqFY7BSnh4UJaEdcoAsmSJYwtEC32L7hTS6KsMHE=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "kate2",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-04-10T20:48:46.470Z",
+      "email": "kate2@mail.com",
+      "email_confirmed": false,
+      "first_name": "kate",
+      "patronymic_name": "v",
+      "created_at": "2025-04-10T20:48:46.472Z",
+      "updated_at": "2025-04-10T20:48:46.472Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$qFyFc8L3t684gWdUrYbJbz$U4QXDIkK9d6hVQETfQGr5ymNYN2YKSKk/bjlHfRbfIU=",
+      "last_login": "2025-04-11T11:58:52.375Z",
+      "is_superuser": true,
+      "username": "kate",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-04-11T11:58:40.732Z",
+      "email": "kate@mail.com",
+      "email_confirmed": false,
+      "first_name": "",
+      "patronymic_name": "",
+      "created_at": "2025-04-11T11:58:42.166Z",
+      "updated_at": "2025-04-11T11:58:42.166Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
