@@ -1,18 +1,26 @@
+export type TSkill = {
+  name: string;
+  level: number;
+};
+
 export type TResume = {
   id: number;
   candidat_name: string;
-  resume_links: string;
-  skills: string[];
+  resume_file?: File;
+  fileName: string;
+  date: string;
+  skills: TSkill[];
   education: string;
-  preferred_position: string;
   appropriate_position: string;
-  eligibility: number;
+  matchPercentage: number;
   missing_skills: string[];
+  recommendations: string[];
 };
 
 export type TUser = {
   email: string;
   name: string;
+  lastName?: string;
   image?: string;
   resumes?: TResume[];
 };

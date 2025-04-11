@@ -63,7 +63,7 @@ type TAuthResponse = TServerResponse<{
 }>;
 
 export const registerUserApi = (data: TRegisterData) =>
-  fetch(`${URL}/api/register/`, {
+  fetch(`${URL}/user/me/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -90,45 +90,17 @@ export const loginUserApi = (data: TLoginData) =>
       return Promise.reject(data);
     });
 
-export const forgotPasswordApi = (data: { email: string }) =>
-  fetch(`${URL}/password-reset/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => checkResponse<TServerResponse<{}>>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
-
-export const resetPasswordApi = (data: { password: string; token: string }) =>
-  fetch(`${URL}/password-reset/reset/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((res) => checkResponse<TServerResponse<{}>>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
-
 type TUserResponse = TServerResponse<{ user: TUser }>;
 
 export const getUserApi = () =>
-  fetchWithRefresh<TUserResponse>(`${URL}/api/user-info/`, {
+  fetchWithRefresh<TUserResponse>(`${URL}/user/me/`, {
     headers: {
       authorization: `Bearer ${getCookie("accessToken")}`,
     } as HeadersInit,
   });
 
 export const updateUserApi = (user: Partial<TRegisterData>) =>
-  fetchWithRefresh<TUserResponse>(`${URL}/api/user-info/`, {
+  fetchWithRefresh<TUserResponse>(`${URL}/user/me/`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -164,7 +136,7 @@ export const uploadResumeApi = async (file: File) => {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await fetch(`${URL}/api/resumes/analyze/`, {
+  const response = await fetch(`${URL}/resume/`, {
     method: "POST",
     body: formData,
   });
@@ -176,7 +148,7 @@ export const uploadResumeApi = async (file: File) => {
 };
 
 export const getResumesApi = () =>
-  fetch(`${URL}/api/resumes/`)
+  fetch(`${URL}/resume/`)
     .then((res) => checkResponse<TResumesResponse>(res))
     .then((data) => {
       if (data?.success) return data.resumes;

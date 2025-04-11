@@ -1,1 +1,24 @@
-
+export const testResumes = [
+  {
+    id: 1,
+    candidat_name: "Резвухина Анна",
+    fileName: "Резвухина_Резюме.pdf",
+    date: "01.01.2018 15:00:00",
+    skills: [
+      { name: "JavaScript", level: 50 },
+      { name: "TypeScript", level: 40 },
+      { name: "Webpack", level: 40 },
+      { name: "React", level: 10 },
+      { name: "Java", level: 10 },
+    ],
+    education: "СПбГУ",
+    appropriate_position: "Junior Frontend Developer",
+    matchPercentage: 85,
+    missing_skills: ["TypeScript", "Next.js"],
+    recommendations: [
+      "Кушать побольше и по вкуснее",
+      "Пройти курсы по прокачке уверенности в себе",
+      "Постаить памятник Александре и молиться",
+    ],
+  },
+];

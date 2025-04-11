@@ -3,18 +3,18 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "../../features/store";
+import { useDispatch } from "../../features/store";
 import { loginUser } from "../../features/slices/userSlice";
 import { MainButton } from "../../shared/ui/MainButton";
 import { LoadingOverlay } from "../../shared/ui/LoadingOverlay";
-import styles from "./Login.module.scss";
 import { TLoginData } from "../../entities/models/types";
+import styles from "./Login.module.scss";
 
 export const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.user.isLoading);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const authFormSchema = yup.object().shape({
@@ -40,12 +40,15 @@ export const LoginPage = () => {
   });
 
   const onSubmit = async (data: TLoginData) => {
+    setIsLoading(true);
     try {
       setError("");
       await dispatch(loginUser(data)).unwrap();
       redirectToMain();
     } catch (error) {
       setError("Данного пользователя не существует.");
+    } finally {
+      setIsLoading(false);
     }
   };
 

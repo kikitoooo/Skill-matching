@@ -1,20 +1,20 @@
+import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MainButton } from "../../shared/ui/MainButton";
-import styles from "./Registration.module.scss";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch, useSelector } from "../../features/store";
+import { useDispatch } from "../../features/store";
 import { useState } from "react";
 import { registerUser } from "../../features/slices/userSlice";
 import { LoadingOverlay } from "../../shared/ui/LoadingOverlay";
 import { TRegisterData } from "../../entities/models/types";
+import styles from "./Registration.module.scss";
 
 export const RegistrationPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.user.isLoading);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const regFormSchema = yup.object().shape({
@@ -44,6 +44,7 @@ export const RegistrationPage = () => {
   });
 
   const onSubmit = async (data: TRegisterData) => {
+    setIsLoading(true);
     setError("");
     const { name, email, password } = data;
 
@@ -52,6 +53,8 @@ export const RegistrationPage = () => {
       navigate("/", { state: { from: location.pathname } });
     } catch (err) {
       setError("Ошибка при регистрации. Попробуйте снова.");
+    } finally {
+      setIsLoading(false);
     }
   };
 

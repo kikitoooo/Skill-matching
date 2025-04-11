@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import styles from "./App.module.scss";
-import "../index.css";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "../features/store";
 import { checkUserAuth, getUser } from "../features/slices/userSlice";
@@ -11,7 +9,14 @@ import { AnalysisPage } from "../pages/AnalysisPage";
 import { LoginPage } from "../pages/LoginPage";
 import { RegistrationPage } from "../pages/RegistrationPage";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { ResumePage } from "../pages/ResumePage";
+import { TestResumePage } from "../pages/TestResumePage";
+import { ScrollToTop } from "../features/hooks/scrollToTop";
+import styles from "./App.module.scss";
+import "../index.css";
+
 export const App = () => {
+  ScrollToTop();
   const location = useLocation();
   const navigate = useNavigate();
   const backgroundLocation = location.state?.background;
@@ -35,7 +40,7 @@ export const App = () => {
             <Route
               path="/analysis"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute onlyUnAuth>
                   <AnalysisPage />
                 </ProtectedRoute>
               }
@@ -56,6 +61,8 @@ export const App = () => {
                 </ProtectedRoute>
               }
             />
+            <Route path="/resumes" element={<TestResumePage />} />
+            <Route path="/resumes/:id" element={<ResumePage />} />
           </Routes>
         </Layout>
       </div>

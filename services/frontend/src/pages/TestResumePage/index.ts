@@ -1,0 +1,1 @@
+export { TestResumePage } from "./TestResumePage";
