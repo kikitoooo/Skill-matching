@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from core.serializers import (CookieTokenRefreshSerializer, CustomUserSerializer,
                               CustomUserCreateSerializer, ResumeCreateSerializer,
                               ResumeSerializer, VacancyCreateSerializer, VacancySerializer)
-from rest_framework import status, viewsets
+from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin, \
     RetrieveModelMixin
@@ -35,6 +35,8 @@ class CookieTokenRefreshView(TokenRefreshView):
 
 class UserProfileViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin,
                          DestroyModelMixin, GenericViewSet):
+
+    permission_classes = [permissions.AllowAny, ]
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
