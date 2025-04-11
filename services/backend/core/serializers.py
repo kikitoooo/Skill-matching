@@ -6,6 +6,8 @@ from processing.models import Resume, Vacancy, JobMatching
 from rest_framework_simplejwt.exceptions import InvalidToken
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 
+from core.parsers.resume_parser import ResumeParser
+
 
 class CookieTokenRefreshSerializer(TokenRefreshSerializer):
     refresh = None
@@ -65,9 +67,25 @@ class ResumeCreateSerializer(serializers.ModelSerializer):
             'job',
             'skills',
             'resume_file',
+            'parsed_resume',
         ]
+        read_only_fields = ['parsed_resume']
 
     def create(self, validated_data):
+        uploaded_file = validated_data.get('resume_file')
+
+        if uploaded_file:
+            try:
+                parsed_resume = ResumeParser.parse_file(uploaded_file)
+                resume = Resume.objects.create(
+                    **validated_data,
+                    parsed_resume=parsed_resume
+                )
+                return resume
+            except Exception as e:
+                raise serializers.ValidationError(
+                    {'resume_file': f'Ошибка при парсинге файла: {str(e)}'}
+                )
         return Resume.objects.create(**validated_data)
 
 
@@ -82,8 +100,8 @@ class ResumeSerializer(serializers.ModelSerializer):
             'surname',
             'job',
             'skills',
-            'resume_file',
             'created_at',
+            'parsed_resume',
         ]
 
 
