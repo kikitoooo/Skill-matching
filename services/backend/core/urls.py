@@ -20,6 +20,8 @@ from processing.views import (CookieTokenObtainPairView, CookieTokenRefreshView,
                               ResumeViewSet, VacancyViewSet)
 from rest_framework.routers import DefaultRouter
 
+from users.views import UserLoginAPIView, UserLogoutAPIView
+
 
 router = DefaultRouter()
 
@@ -38,6 +40,8 @@ router.register(r'vacancy',
 urlpatterns = [
     path('auth/token/', CookieTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/token/refresh/', CookieTokenRefreshView.as_view(), name='token_refresh'),
+    path("login/", UserLoginAPIView.as_view(), name="login-user"),
+    path("logout/", UserLogoutAPIView.as_view(), name="logout-user"),
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
 ]
