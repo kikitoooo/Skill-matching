@@ -46,12 +46,20 @@ class UserProfileViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelM
         return queryset
 
     def create(self, request, *args, **kwargs):
-
         serializer = CustomUserCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = {
+            "success": True,
+            "resume": serializer.data
+        }
+        return Response(data, status=status.HTTP_200_OK)
 
 
 class ResumeViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin,
@@ -72,6 +80,24 @@ class ResumeViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin,
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = {
+            "success": True,
+            "resume": serializer.data
+        }
+        return Response(data, status=status.HTTP_200_OK)
+
+    def list(self, request, *args, **kwargs):
+        resumes = self.get_queryset()
+        serializer = self.get_serializer(resumes, many=True)
+        data = {
+            "success": True,
+            "resumes": serializer.data
+        }
+        return Response(data, status=status.HTTP_200_OK)
 
 
 class VacancyViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin,

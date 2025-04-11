@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from users.models import CustomUser as User
 from djoser.serializers import UserCreateSerializer, UserSerializer
+from django.contrib.auth import authenticate
 
 from processing.models import Resume, Vacancy, JobMatching
 from rest_framework_simplejwt.exceptions import InvalidToken
@@ -56,6 +57,17 @@ class CustomUserSerializer(UserSerializer):
         ]
 
 
+class CustomUserLoginSerializer(serializers.Serializer):
+    email = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        user = authenticate(**data)
+        if user:
+            return user
+        raise serializers.ValidationError("Incorrect Credentials")
+
+
 class ResumeCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resume
@@ -68,7 +80,6 @@ class ResumeCreateSerializer(serializers.ModelSerializer):
             'skills',
             'resume_file',
             'parsed_resume',
-            'resume_file'
         ]
         read_only_fields = ['parsed_resume']
 
@@ -103,7 +114,6 @@ class ResumeSerializer(serializers.ModelSerializer):
             'skills',
             'created_at',
             'parsed_resume',
-            'resume_file'
         ]
 
 
@@ -169,3 +179,5 @@ class JobMatchingSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
         ]
+
+
