@@ -63,7 +63,7 @@ type TAuthResponse = TServerResponse<{
 }>;
 
 export const registerUserApi = (data: TRegisterData) =>
-  fetch(`${URL}/user/me/`, {
+  fetch(`${URL}/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -77,7 +77,7 @@ export const registerUserApi = (data: TRegisterData) =>
     });
 
 export const loginUserApi = (data: TLoginData) =>
-  fetch(`${URL}/api/login/`, {
+  fetch(`${URL}/login/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -110,7 +110,7 @@ export const updateUserApi = (user: Partial<TRegisterData>) =>
   });
 
 export const logoutApi = () =>
-  fetch(`${URL}/api/logout/`, {
+  fetch(`${URL}/logout/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",

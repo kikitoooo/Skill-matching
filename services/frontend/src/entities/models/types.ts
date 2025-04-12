@@ -10,7 +10,7 @@ export type TResume = {
   fileName: string;
   date: string;
   skills: TSkill[];
-  education: string;
+  education?: string;
   appropriate_position: string;
   matchPercentage: number;
   missing_skills: string[];
@@ -38,9 +38,8 @@ export type TLoginData = {
 export type TRegisterData = {
   email: string;
   name: string;
+  lastName?: string;
   password: string;
-  image?: string;
-  resume?: TResume[];
 };
 
 export type PageUIProps = {

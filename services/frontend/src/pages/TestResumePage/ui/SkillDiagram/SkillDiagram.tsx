@@ -8,7 +8,7 @@ import {
   CartesianGrid,
   Cell,
 } from "recharts";
-import { TResume } from "../../../entities/models/types";
+import { TResume } from "../../../../entities/models/types";
 
 export type SkillDiagramProps = {
   resume: TResume;
