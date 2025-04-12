@@ -4,8 +4,8 @@ from processing.models import Resume, Vacancy, JobMatching
 
 @admin.register(Resume)
 class ResumeAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'patronymic_name', 'surname', 'job', 'skills', 'resume_file', 'created_at']
-    search_fields = ['first_name', 'patronymic_name', 'surname', 'job']
+    list_display = ['first_name', 'surname', 'job', 'skills', 'resume_file', 'created_at']
+    search_fields = ['first_name', 'surname', 'job']
     list_filter = ['patronymic_name']
     ordering = ['patronymic_name']
 

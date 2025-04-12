@@ -21,7 +21,7 @@ class Vacancy(models.Model):
 
 
 class JobMatching(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE) #HR, который провёл проверку на совпадение
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='resumes') #HR, который провёл проверку на совпадение
     vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE)
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
     match = models.FloatField(verbose_name='Коэффициент совпадения резюме с вакансией')

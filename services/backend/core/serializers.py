@@ -21,24 +21,17 @@ class CookieTokenRefreshSerializer(TokenRefreshSerializer):
             raise InvalidToken('No valid token found in cookie \'refresh_token\'')
 
 
-class CustomUserCreateSerializer(UserCreateSerializer):
+class UserWithResumesSerializer(serializers.ModelSerializer):
+    resumes = serializers.SerializerMethodField()
+
     class Meta:
         model = User
-        fields = [
-            'id',
-            'email',
-            'username',
-            'password',
-        ]
+        fields = ['id', 'name', 'email', 'last_name', 'image', 'resumes']
 
-    def create(self, validated_data):
-        password = validated_data.pop('password', None)
-        user = User.objects.create(**validated_data)
-        user.is_active = True
-        if password is not None:
-            user.set_password(password)
-        user.save()
-        return user
+    def get_resumes(self, obj):
+        matchings = JobMatching.objects.filter(user=obj).select_related('resume')
+        resumes = [matching.resume for matching in matchings]
+        return ResumeSerializer(resumes, many=True).data
 
 
 class CustomUserSerializer(UserSerializer):
@@ -47,10 +40,9 @@ class CustomUserSerializer(UserSerializer):
         fields = [
             'id',
             'email',
-            'username',
-            'first_name',
-            'patronymic_name',
+            'name',
             'last_name',
+            'image'
         ]
 
 
@@ -63,6 +55,17 @@ class CustomUserLoginSerializer(serializers.Serializer):
         if user:
             return user
         raise serializers.ValidationError("Incorrect Credentials")
+
+
+class CustomUserRegistrationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ("id", "name", "last_name", "email", "password", "image")
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
 
 
 class ResumeCreateSerializer(serializers.ModelSerializer):
@@ -99,19 +102,9 @@ class ResumeCreateSerializer(serializers.ModelSerializer):
 
 
 class ResumeSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Resume
-        fields = [
-            'id',
-            'first_name',
-            'patronymic_name',
-            'surname',
-            'job',
-            'skills',
-            'created_at',
-            'parsed_resume',
-        ]
+        fields = '__all__'
 
 
 class VacancyCreateSerializer(serializers.ModelSerializer):
@@ -176,5 +169,3 @@ class JobMatchingSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
         ]
-
-

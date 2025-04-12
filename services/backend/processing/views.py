@@ -1,16 +1,16 @@
 from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
-from core.serializers import (CookieTokenRefreshSerializer, CustomUserSerializer,
-                              CustomUserCreateSerializer, ResumeCreateSerializer,
+from core.serializers import (CookieTokenRefreshSerializer, ResumeCreateSerializer,
                               ResumeSerializer, VacancyCreateSerializer, VacancySerializer)
 from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
-from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin, DestroyModelMixin, \
-    RetrieveModelMixin
+from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin, RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet
 
 from .models import CustomUser, Resume, Vacancy
+from core.serializers import UserWithResumesSerializer
+from core.permissions import IsOwnerOrSuperuser
 
 
 class CookieTokenObtainPairView(TokenObtainPairView):
@@ -33,35 +33,37 @@ class CookieTokenRefreshView(TokenRefreshView):
     serializer_class = CookieTokenRefreshSerializer
 
 
-class UserProfileViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin,
-                         DestroyModelMixin, GenericViewSet):
-
-    permission_classes = [permissions.AllowAny, ]
-
-    def get_serializer_class(self):
-        if self.request.method == 'GET':
-            return CustomUserSerializer
-        return CustomUserCreateSerializer
-
-    def get_queryset(self):
-        queryset = CustomUser.objects.filter(username=self.request.user)
-        return queryset
-
-    def create(self, request, *args, **kwargs):
-        serializer = CustomUserCreateSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = CustomUser.objects.all().prefetch_related(
+        'resumes__resume'
+    )
+    serializer_class = UserWithResumesSerializer
+    permission_classes = permission_classes = [permissions.IsAuthenticated, IsOwnerOrSuperuser]
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        data = {
+        return Response({
             "success": True,
-            "resume": serializer.data
-        }
-        return Response(data, status=status.HTTP_200_OK)
+            "user": serializer.data
+        })
+
+    def partial_update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance != request.user and not request.user.is_superuser:
+            return Response(
+                {"success": False},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({
+            "success": True,
+            "user": serializer.data
+        })
+
 
 
 class ResumeViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin,
@@ -120,4 +122,3 @@ class VacancyViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-# Create your views here.

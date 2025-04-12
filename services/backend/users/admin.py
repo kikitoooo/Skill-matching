@@ -3,9 +3,9 @@ from users.models import CustomUser as User
 
 
 @admin.register(User)
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email', 'first_name', 'patronymic_name', 'last_name', 'created_at', 'updated_at']
-    search_fields = ['username', 'email']
-    list_filter = ['username', 'email']
-    ordering = ['username']
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'first_name', 'last_name', 'created_at', 'updated_at']
+    search_fields = ['name', 'email']
+    list_filter = ['name', 'email']
+    ordering = ['name']
 # Register your models here.
