@@ -23,6 +23,10 @@ export const RegistrationPage = () => {
       .string()
       .required("Введите имя")
       .min(2, "Неверно заполнено имя. Минимум 2 символа"),
+    lastName: yup
+      .string()
+      .required("Введите фамилию")
+      .min(2, "Неверно заполнена фамилия. Минимум 2 символа"),
     password: yup
       .string()
       .required("Введите пароль")
@@ -46,10 +50,12 @@ export const RegistrationPage = () => {
   const onSubmit = async (data: TRegisterData) => {
     setIsLoading(true);
     setError("");
-    const { name, email, password } = data;
+    const { name, lastName, email, password } = data;
 
     try {
-      await dispatch(registerUser({ name: name, email, password })).unwrap();
+      await dispatch(
+        registerUser({ name, lastName, email, password })
+      ).unwrap();
       navigate("/", { state: { from: location.pathname } });
     } catch (err) {
       setError("Ошибка при регистрации. Попробуйте снова.");
@@ -70,19 +76,6 @@ export const RegistrationPage = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.inputGroup}>
-          <label className={styles.label}>Почта</label>
-          <input
-            {...register("email")}
-            className={styles.input}
-            type="email"
-            placeholder="Введите email"
-          />
-          {errors.email && (
-            <span className={styles.error}>{errors.email.message}</span>
-          )}
-        </div>
-
-        <div className={styles.inputGroup}>
           <label className={styles.label}>Имя</label>
           <input
             {...register("name")}
@@ -92,6 +85,32 @@ export const RegistrationPage = () => {
           />
           {errors.name && (
             <span className={styles.error}>{errors.name.message}</span>
+          )}
+        </div>
+
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Фамилия</label>
+          <input
+            {...register("lastName")}
+            className={styles.input}
+            type="text"
+            placeholder="Введите фамилию"
+          />
+          {errors.lastName && (
+            <span className={styles.error}>{errors.lastName.message}</span>
+          )}
+        </div>
+
+        <div className={styles.inputGroup}>
+          <label className={styles.label}>Почта</label>
+          <input
+            {...register("email")}
+            className={styles.input}
+            type="email"
+            placeholder="Введите email"
+          />
+          {errors.email && (
+            <span className={styles.error}>{errors.email.message}</span>
           )}
         </div>
 
