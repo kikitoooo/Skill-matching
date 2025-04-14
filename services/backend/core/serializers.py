@@ -26,7 +26,7 @@ class UserWithResumesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'name', 'email', 'last_name', 'image', 'resumes']
+        fields = ['id', 'name', 'email', 'lastName', 'image', 'resumes']
 
     def get_resumes(self, obj):
         matchings = JobMatching.objects.filter(user=obj).select_related('resume')
@@ -41,7 +41,7 @@ class CustomUserSerializer(UserSerializer):
             'id',
             'email',
             'name',
-            'last_name',
+            'lastName',
             'image'
         ]
 
@@ -61,7 +61,7 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "name", "last_name", "email", "password", "image")
+        fields = ("id", "name", "lastName", "email", "password", "image")
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):

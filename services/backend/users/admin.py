@@ -4,7 +4,7 @@ from users.models import CustomUser as User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'first_name', 'last_name', 'created_at', 'updated_at']
+    list_display = ['name', 'email', 'first_name', 'lastName', 'created_at', 'updated_at']
     search_fields = ['name', 'email']
     list_filter = ['name', 'email']
     ordering = ['name']
