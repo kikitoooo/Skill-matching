@@ -43,7 +43,7 @@ export const App = () => {
             <Route
               path="/analysis"
               element={
-                <ProtectedRoute onlyUnAuth>
+                <ProtectedRoute>
                   <AnalysisPage />
                 </ProtectedRoute>
               }
@@ -69,7 +69,7 @@ export const App = () => {
             <Route
               path="/profile"
               element={
-                <ProtectedRoute onlyUnAuth>
+                <ProtectedRoute>
                   <ProfilePage />
                 </ProtectedRoute>
               }

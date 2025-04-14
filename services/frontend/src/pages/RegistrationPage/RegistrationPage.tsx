@@ -56,7 +56,7 @@ export const RegistrationPage = () => {
       await dispatch(
         registerUser({ name, lastName, email, password })
       ).unwrap();
-      navigate("/", { state: { from: location.pathname } });
+      navigate("/profile", { state: { from: location.pathname } });
     } catch (err) {
       setError("Ошибка при регистрации. Попробуйте снова.");
     } finally {

@@ -93,14 +93,14 @@ export const loginUserApi = (data: TLoginData) =>
 type TUserResponse = TServerResponse<{ user: TUser }>;
 
 export const getUserApi = () =>
-  fetchWithRefresh<TUserResponse>(`${URL}/user/me/`, {
+  fetchWithRefresh<TUserResponse>(`${URL}/user-info/`, {
     headers: {
       authorization: `Bearer ${getCookie("accessToken")}`,
     } as HeadersInit,
   });
 
 export const updateUserApi = (user: Partial<TRegisterData>) =>
-  fetchWithRefresh<TUserResponse>(`${URL}/user/me/`, {
+  fetchWithRefresh<TUserResponse>(`${URL}/user-info/`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json;charset=utf-8",

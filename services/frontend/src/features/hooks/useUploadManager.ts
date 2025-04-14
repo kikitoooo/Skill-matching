@@ -91,15 +91,17 @@ export const useUploadManager = () => {
         },
       ]);
     } catch (error: any) {
+      const errorMessage = error?.message ?? "";
+
       setNotifications((prev) => [
         ...prev,
         {
           name,
           message:
-            error.message === "Невозможно извлечь данные из резюме."
+            errorMessage === "Невозможно извлечь данные из резюме."
               ? "Файл не содержит распознаваемой информации."
               : "Ошибка сервера. Попробуйте снова.",
-          type: error.message.includes("распознаваемой") ? "warning" : "error",
+          type: errorMessage.includes("распознаваемой") ? "warning" : "error",
           isVisible: true,
         },
       ]);
