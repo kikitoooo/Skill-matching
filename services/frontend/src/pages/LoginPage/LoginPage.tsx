@@ -39,26 +39,25 @@ export const LoginPage = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async (data: TLoginData) => {
-    setIsLoading(true);
-    redirectToProfile();
-    // try {
-    //   setError("");
-    //   await dispatch(loginUser(data)).unwrap();
-    //   redirectToMain();
-    // } catch (error) {
-    //   setError("Данного пользователя не существует.");
-    // } finally {
-    //   setIsLoading(false);
-    // }
-  };
-
   const redirectToRegister = () => {
     navigate("/register", { state: { from: location.pathname } });
   };
 
   const redirectToProfile = () => {
     navigate("/profile", { state: { from: location.pathname } });
+  };
+
+  const onSubmit = async (data: TLoginData) => {
+    setIsLoading(true);
+    try {
+      setError("");
+      await dispatch(loginUser(data)).unwrap();
+      redirectToProfile();
+    } catch (error) {
+      setError("Данного пользователя не существует.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

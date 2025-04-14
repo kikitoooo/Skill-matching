@@ -12,8 +12,8 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { ResumePage } from "../pages/ResumePage";
 import { TestResumePage } from "../pages/TestResumePage";
 import { ProfilePage } from "../pages/ProfilePage";
-import {Dashboard} from '../pages/ProfilePage/ui/Dashboard'
-import {EditProfilePage} from '../pages/ProfilePage/ui/EditProfilePage'
+import { Dashboard } from "../pages/ProfilePage/ui/Dashboard";
+import { EditProfilePage } from "../pages/ProfilePage/ui/EditProfilePage";
 import { ScrollToTop } from "../features/hooks/scrollToTop";
 import styles from "./App.module.scss";
 import "../index.css";
@@ -66,7 +66,14 @@ export const App = () => {
             />
             <Route path="/resumes" element={<TestResumePage />} />
             <Route path="/resumes/:id" element={<ResumePage />} />
-            <Route path="/profile" element={<ProfilePage />}>
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute onlyUnAuth>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<Dashboard />} />
               <Route path="new-analysis" element={<AnalysisPage />} />
               <Route path="edit" element={<EditProfilePage />} />

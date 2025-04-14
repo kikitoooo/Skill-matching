@@ -1,21 +1,23 @@
 import { useSelector } from "../../../../features/store";
-import { selectResumes } from "../../../../features/slices/resumeSlice";
 import { selectUser } from "../../../../features/slices/userSlice";
-import { testResumes } from "../../../../app/testData";
 import styles from "./Dashboard.module.scss";
 
 export const Dashboard = () => {
   const user = useSelector(selectUser);
-  const resumes = useSelector(selectResumes);
-  
+  const resumes = user?.resumes || [];
+
   // статистика
   const processedResumes = resumes.length;
-  const successfulAnalyses = resumes.filter(r => r.matchPercentage >= 60).length;
-  const suitableCandidates = resumes.filter(r => r.matchPercentage >= 85).length;
+  const successfulAnalyses = resumes.filter(
+    (r) => r.matchPercentage >= 60
+  ).length;
+  const suitableCandidates = resumes.filter(
+    (r) => r.matchPercentage >= 85
+  ).length;
 
   // сортировка
-  const sortedResumes = [...resumes].sort((a, b) => 
-    new Date(b.date).getTime() - new Date(a.date).getTime()
+  const sortedResumes = [...resumes].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
   return (
@@ -24,7 +26,7 @@ export const Dashboard = () => {
       <p className={styles.welcomeMessage}>
         Добро пожаловать, {user.name}. Вот обзор Ваших последних анализов.
       </p>
-      
+
       <h2 className={styles.sectionTitle}>Статистика</h2>
       <div className={styles.stats}>
         <div className={styles.statCard}>
@@ -40,7 +42,7 @@ export const Dashboard = () => {
           <div className={styles.statLabel}>Подходящих кандидатов</div>
         </div>
       </div>
-      
+
       <h2 className={styles.sectionTitle}>Последние анализы</h2>
       <div className={styles.analysesTable}>
         {resumes.length > 0 ? (
@@ -61,10 +63,16 @@ export const Dashboard = () => {
                   <td>{resume.appropriate_position}</td>
                   <td>{new Date(resume.date).toLocaleDateString()}</td>
                   <td>
-                    <span className={
-                      resume.matchPercentage >= 70 ? styles.statusVerified : styles.statusErrorCheck
-                    }>
-                      {resume.matchPercentage >= 70 ? 'Успешно проверено' : 'Ошибка анализа'}
+                    <span
+                      className={
+                        resume.matchPercentage >= 70
+                          ? styles.statusVerified
+                          : styles.statusErrorCheck
+                      }
+                    >
+                      {resume.matchPercentage >= 70
+                        ? "Успешно проверено"
+                        : "Ошибка анализа"}
                     </span>
                   </td>
                   <td className="percent">{resume.matchPercentage}%</td>
