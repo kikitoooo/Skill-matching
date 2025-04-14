@@ -1,0 +1,140 @@
+p {
+  margin: 0;
+}
+
+.analysis_section {
+  margin: 0 auto;
+  padding: 4rem 1.25rem;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.heading {
+  font-size: clamp(1.5rem, 1.3987rem + 0.5063vw, 2rem);
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.2;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.error {
+  color: #e64545;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.paragraph {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(1rem, 0.9494rem + 0.2532vw, 1.25rem);
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dots {
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+}
+
+.analysis_text {
+  color: rgb(22 34 151 / var(--tw-border-opacity, 1));
+  font-size: clamp(1rem, 0.9494rem + 0.2532vw, 1.25rem);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.analysis_text::after {
+  content: ".";
+  animation: dots 1.5s infinite steps(3, end);
+  position: relative;
+  left: 4px;
+}
+
+.notifications {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 2rem);
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1000;
+  transition: all;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeOutSmooth {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (min-width: 768px) {
+  .analysis_section {
+    padding: 4rem 0rem;
+  }
+  .wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1440px) {
+  .notifications {
+    right: calc(50% - 720px + 2rem);
+  }
+}

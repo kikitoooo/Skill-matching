@@ -1,0 +1,71 @@
+.progress_container {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: #555;
+  width: 60%;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.progress_bar {
+  height: 0.375rem;
+  background-color: rgb(184, 70, 232);
+  margin-bottom: 0.5rem;
+  transition: width 0.5s ease;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.analysis_text {
+  color: rgb(22 34 151 / var(--tw-border-opacity, 1));
+  font-size: clamp(1rem, 0.9494rem + 0.2532vw, 1.25rem);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.analysis_text::after {
+  content: ".";
+  animation: dots 1.5s infinite steps(3, end);
+  position: relative;
+  left: 4px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOutSmooth {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.fade_out {
+  animation: fadeOutSmooth 1s ease forwards;
+}
+
+@keyframes dots {
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+}
