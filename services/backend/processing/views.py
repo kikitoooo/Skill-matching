@@ -7,6 +7,7 @@ from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin, RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.generics import RetrieveUpdateAPIView
 
 from .models import CustomUser, Resume, Vacancy
 from core.serializers import UserWithResumesSerializer
@@ -33,37 +34,43 @@ class CookieTokenRefreshView(TokenRefreshView):
     serializer_class = CookieTokenRefreshSerializer
 
 
-class UserProfileViewSet(viewsets.ModelViewSet):
+class UserProfileApiWiew(RetrieveUpdateAPIView):
     queryset = CustomUser.objects.all().prefetch_related(
         'resumes__resume'
     )
     serializer_class = UserWithResumesSerializer
-    permission_classes = permission_classes = [permissions.IsAuthenticated, IsOwnerOrSuperuser]
+    permission_classes = [permissions.IsAuthenticated]
 
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance)
-        return Response({
+    def get_object(self):
+        return self.request.user
+
+    def get(self, request, *args, **kwargs):
+        user = self.get_object()
+        serializer = self.get_serializer(user)
+        data = {
             "success": True,
-            "user": serializer.data
-        })
+            "user": serializer.data,
+        }
+        return Response(data, status=status.HTTP_200_OK)
 
-    def partial_update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        if instance != request.user and not request.user.is_superuser:
-            return Response(
-                {"success": False},
-                status=status.HTTP_403_FORBIDDEN
-            )
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+
+    def patch(self, request, *args, **kwargs):
+        user = self.get_object()
+        serializer = self.get_serializer(user, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            user.save()
+            data = {
+                "success": True,
+                "user": serializer.data
+            }
+            return Response(data, status=status.HTTP_200_OK)
 
         return Response({
-            "success": True,
-            "user": serializer.data
-        })
-
+            "success": False,
+            "errors": serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ResumeViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin,
