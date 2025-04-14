@@ -1,0 +1,47 @@
+.button {
+  display: flex;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-radius: 9999px;
+  border-style: none;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.button:hover {
+  color: rgb(140, 40, 183);
+  --tw-shadow-color: rgb(15, 27, 196);
+  --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  --tw-shadow: var(--tw-shadow-colored);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0f1bc4),
+    var(--tw-ring-shadow, 0 0 #0f1bc4), var(--tw-shadow);
+}
+
+.icon {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+@media (min-width: 1024px) {
+  .button {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .button {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .button {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}

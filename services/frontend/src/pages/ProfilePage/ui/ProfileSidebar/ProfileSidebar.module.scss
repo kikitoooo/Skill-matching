@@ -1,0 +1,95 @@
+.sidebar {
+  width: 260px;
+  background-color: #fff;
+  padding: 24px 16px;
+  height: 100%;
+  box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.userInfo {
+  margin-bottom: 32px;
+  text-align: center;
+  padding-bottom: 24px;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8d2ccd 0%, #553c9a 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 12px;
+  font-weight: 500;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: rgba(22, 34, 151);
+}
+
+.company {
+  color: #718096;
+  font-size: 14px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  color: #4a5568;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-size: 15px;
+  
+  &:hover {
+    background-color: #f3e8ff;
+    color: #6b46c1;
+    
+    svg {
+      color: #6b46c1;
+    }
+  }
+  
+  svg {
+    width: 20px;
+    height: 20px;
+    color: #4a5568;
+    transition: all 0.2s;
+  }
+}
+
+.active {
+  background-color: #f3e8ff;
+  color: #6b46c1;
+  font-weight: 500;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #8d2ccd;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  svg {
+    color: #6b46c1;
+  }
+}

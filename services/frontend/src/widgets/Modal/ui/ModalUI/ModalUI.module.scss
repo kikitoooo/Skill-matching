@@ -1,0 +1,40 @@
+.modal {
+  width: 90%;
+  padding: 2.5rem 2rem;
+}
+
+.button_container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  --tw-text-opacity: 1;
+  color: rgb(176 49 230 / var(--tw-text-opacity, 1));
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: max-content;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 2.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .modal {
+    min-width: 600px;
+  }
+}
