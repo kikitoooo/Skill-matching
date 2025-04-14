@@ -1,7 +1,7 @@
 import { TLoginData, TRegisterData, TResume, TUser } from "../models/types";
 import { deleteCookie, getCookie, setCookie } from "./cookie";
 
-const URL = "http://localhost:8000/";
+const URL = "http://127.0.0.1:8000";
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
@@ -63,7 +63,7 @@ type TAuthResponse = TServerResponse<{
 }>;
 
 export const registerUserApi = (data: TRegisterData) =>
-  fetch(`${URL}/register`, {
+  fetch(`${URL}/register/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",

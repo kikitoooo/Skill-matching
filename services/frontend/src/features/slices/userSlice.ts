@@ -18,6 +18,7 @@ interface UserState {
 }
 
 interface TRegisterData {
+  lastName?: string;
   name: string;
   email: string;
   password: string;
