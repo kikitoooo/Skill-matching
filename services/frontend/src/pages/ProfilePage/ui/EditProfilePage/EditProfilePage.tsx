@@ -1,12 +1,18 @@
 import * as yup from "yup";
 import { useEffect, useState } from "react";
-import { useForm, type Resolver } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "../../../../features/store";
 import { TRegisterData } from "../../../../entities/models/types";
 import { selectUser, updateUser } from "../../../../features/slices/userSlice";
 import { LoadingOverlay } from "../../../../shared/ui/LoadingOverlay";
+import { MainButton } from "../../../../shared/ui/MainButton";
+import { Notification } from "../../../AnalysisPage/ui/Notification";
+import { AvatarUploader } from "./ui/AvatarUploader";
+import { FormInput } from "./ui/FormInput";
 import styles from "./EditProfilePage.module.scss";
+
+type NotificationType = "success" | "warning" | "error";
 
 const profileSchema = yup.object({
   name: yup.string().optional(),
@@ -50,6 +56,13 @@ export const EditProfilePage = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState("");
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [notification, setNotification] = useState({
+    isVisible: false,
+    name: "",
+    message: "",
+    type: "success" as NotificationType,
+  });
 
   const {
     register,
@@ -60,7 +73,7 @@ export const EditProfilePage = () => {
     trigger,
     clearErrors,
   } = useForm<FormData>({
-    resolver: yupResolver(profileSchema) as Resolver<FormData>,
+    resolver: yupResolver(profileSchema),
     mode: "onChange",
     defaultValues: {
       name: user.name || "",
@@ -87,12 +100,30 @@ export const EditProfilePage = () => {
     }
   }, [password, trigger, clearErrors]);
 
+  const showNotification = (
+    name: string,
+    message: string,
+    type: NotificationType = "success"
+  ) => {
+    setNotification({
+      isVisible: true,
+      name,
+      message,
+      type,
+    });
+
+    setTimeout(() => {
+      setNotification((prev) => ({ ...prev, isVisible: false }));
+    }, 2000);
+  };
+
   const isSubmitDisabled =
     (!name?.trim() &&
       !lastName?.trim() &&
       !email?.trim() &&
       !password?.trim() &&
-      !confirmPassword?.trim()) ||
+      !confirmPassword?.trim() &&
+      !previewImage) ||
     !!errors.name ||
     !!errors.lastName ||
     !!errors.email ||
@@ -110,6 +141,7 @@ export const EditProfilePage = () => {
         ...(data.lastName && { lastName: data.lastName.trim() }),
         ...(data.email && { email: data.email.trim() }),
         ...(data.password && { password: data.password }),
+        ...(previewImage && { image: previewImage }),
       };
 
       await dispatch(updateUser(updateData)).unwrap();
@@ -122,10 +154,13 @@ export const EditProfilePage = () => {
         { keepValues: true }
       );
 
-      alert("Данные успешно обновлены!");
+      showNotification("Успех", "Данные профиля успешно обновлены");
     } catch (error) {
       console.error("Ошибка при обновлении:", error);
-      setServerError("Ошибка при сохранении данных");
+      const errorMessage =
+        error instanceof Error ? error.message : "Ошибка при сохранении данных";
+      setServerError(errorMessage);
+      showNotification("Ошибка", errorMessage, "error");
     } finally {
       setIsLoading(false);
     }
@@ -138,88 +173,79 @@ export const EditProfilePage = () => {
       {isLoading && <LoadingOverlay />}
 
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <div className={styles.formGroup}>
-          <label>Имя</label>
-          <input
-            type="text"
-            {...register("name")}
-            className={errors.name ? styles.errorInput : ""}
+        <div className={styles.formColumns}>
+          <div className={styles.leftColumn}>
+            <AvatarUploader
+              previewImage={previewImage}
+              userImage={user.image}
+              onImageChange={setPreviewImage}
+              serverError={serverError}
+              setServerError={setServerError}
+            />
+
+            <FormInput
+              label="Имя"
+              type="text"
+              register={register("name")}
+              error={errors.name}
+            />
+
+            <FormInput
+              label="Фамилия"
+              type="text"
+              register={register("lastName")}
+              error={errors.lastName}
+            />
+          </div>
+
+          <div className={styles.rightColumn}>
+            <FormInput
+              label="Email"
+              type="email"
+              register={register("email")}
+              error={errors.email}
+            />
+
+            <div className={styles.formGroup}>
+              <label>Компания</label>
+              <input type="text" value="Газпром" disabled />
+            </div>
+
+            <FormInput
+              label="Новый пароль"
+              type="password"
+              register={register("password")}
+              error={errors.password}
+            />
+
+            <FormInput
+              label="Подтвердите пароль"
+              type="password"
+              placeholder={
+                password ? "Подтвердите новый пароль" : ""
+              }
+              register={register("confirmPassword")}
+              error={errors.confirmPassword}
+            />
+          </div>
+        </div>
+
+        <div className={styles.notificationWrapper}>
+          <Notification
+            isVisible={notification.isVisible}
+            name={notification.name}
+            message={notification.message}
+            type={notification.type}
           />
-          {errors.name && (
-            <span className={styles.error}>{errors.name.message}</span>
-          )}
         </div>
 
-        <div className={styles.formGroup}>
-          <label>Фамилия</label>
-          <input
-            type="text"
-            {...register("lastName")}
-            className={errors.lastName ? styles.errorInput : ""}
-          />
-          {errors.lastName && (
-            <span className={styles.error}>{errors.lastName.message}</span>
-          )}
-        </div>
-
-        <div className={styles.formGroup}>
-          <label>Email</label>
-          <input
-            type="email"
-            {...register("email")}
-            className={errors.email ? styles.errorInput : ""}
-          />
-          {errors.email && (
-            <span className={styles.error}>{errors.email.message}</span>
-          )}
-        </div>
-
-        <div className={styles.formGroup}>
-          <label>Компания</label>
-          <input type="text" value="Газпром" disabled />
-        </div>
-
-        <div className={styles.formGroup}>
-          <label>Новый пароль</label>
-          <input
-            type="password"
-            placeholder="Оставьте пустым, если не нужно менять"
-            {...register("password")}
-            className={errors.password ? styles.errorInput : ""}
-          />
-          {errors.password && (
-            <span className={styles.error}>{errors.password.message}</span>
-          )}
-        </div>
-
-        <div className={styles.formGroup}>
-          <label>Подтвердите пароль</label>
-          <input
-            type="password"
-            placeholder={
-              password ? "Подтвердите новый пароль" : "Оставьте пустым"
-            }
-            {...register("confirmPassword")}
-            className={errors.confirmPassword ? styles.errorInput : ""}
-          />
-          {errors.confirmPassword && (
-            <span className={styles.error}>
-              {errors.confirmPassword.message}
-            </span>
-          )}
-        </div>
-
-        {serverError && <p className={styles.serverError}>{serverError}</p>}
-
-        <button
-          type="submit"
-          className={`${styles.saveButton} ${
+        <MainButton
+          title="Сохранить изменения"
+          className={`${styles.mainButton} ${
             isSubmitDisabled ? styles.disabled : ""
           }`}
-          disabled={Boolean(isSubmitDisabled)}
-        >
-          Сохранить изменения
-        </button>
+          type="submit"
+        />
       </form>
     </div>
   );

@@ -1,0 +1,41 @@
+.formGroup {
+  margin-bottom: 16px;
+  width: 100%;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #4a5568;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #9f7aea;
+    }
+
+    &:disabled {
+      background-color: #f8fafc;
+      color: #a0aec0;
+    }
+  }
+}
+
+.errorInput {
+  border-color: #e53e3e !important;
+}
+
+.error {
+  display: block;
+  margin-top: 4px;
+  color: #e53e3e;
+  font-size: 12px;
+}
