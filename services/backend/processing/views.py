@@ -1,6 +1,16 @@
 from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from docx import Document
 
+from natasha import (
+    Segmenter,  # Разбиение текста на токены
+    MorphVocab,  # Морфологический словарь
+    NewsEmbedding,  # Предобученная модель
+    NewsMorphTagger,  # Тэгер частей речи
+    NewsSyntaxParser,  # Синтаксический парсер
+    NewsNERTagger,  # Извлечение именованных сущностей (NER)
+    Doc
+)
 from core.serializers import (CookieTokenRefreshSerializer, ResumeCreateSerializer,
                               ResumeSerializer, VacancyCreateSerializer, VacancySerializer)
 from rest_framework import status, viewsets, permissions
@@ -76,6 +86,33 @@ class ResumeViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin,
     def get_queryset(self):
         queryset = Resume.objects.all()
         return queryset
+
+    @staticmethod
+    def get_fullname(file_name):
+        doc = Document(file_name)
+        text = "\n".join([paragraph.text for paragraph in doc.paragraphs])
+
+        segmenter = Segmenter()  # Сегментация текста
+        morph_vocab = MorphVocab()  # Морфологический словарь
+
+        # Загрузка моделей для NER
+        emb = NewsEmbedding()
+        morph_tagger = NewsMorphTagger(emb)
+        syntax_parser = NewsSyntaxParser(emb)
+        ner_tagger = NewsNERTagger(emb)
+
+        # Обработка текста
+        doc = Doc(text)
+        doc.segment(segmenter)  # Сегментация на токены
+        doc.tag_morph(morph_tagger)  # Разметка морфологии
+        doc.parse_syntax(syntax_parser)  # Синтаксический разбор
+        doc.tag_ner(ner_tagger)  # Извлечение именованных сущностей
+
+        # Извлечение ФИО (PER — персона)
+        for span in doc.spans:
+            if span.type == "PER":
+                span.normalize(morph_vocab)
+                return span.text
 
     def create(self, request, *args, **kwargs):
 
