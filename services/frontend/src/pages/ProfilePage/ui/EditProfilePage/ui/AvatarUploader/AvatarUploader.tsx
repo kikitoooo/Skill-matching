@@ -3,7 +3,7 @@ import styles from "../../EditProfilePage.module.scss";
 
 interface AvatarUploaderProps {
   previewImage: string | null;
-  userImage: string | null;
+  userImage: string | undefined;
   onImageChange: (image: string | null) => void;
   serverError: string;
   setServerError: (error: string) => void;

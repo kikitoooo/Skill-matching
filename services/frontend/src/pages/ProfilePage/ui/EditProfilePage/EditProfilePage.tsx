@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "../../../../features/store";
 import { TRegisterData } from "../../../../entities/models/types";
@@ -73,7 +73,7 @@ export const EditProfilePage = () => {
     trigger,
     clearErrors,
   } = useForm<FormData>({
-    resolver: yupResolver(profileSchema),
+    resolver: yupResolver(profileSchema) as Resolver<FormData>,
     mode: "onChange",
     defaultValues: {
       name: user.name || "",
@@ -221,9 +221,7 @@ export const EditProfilePage = () => {
             <FormInput
               label="Подтвердите пароль"
               type="password"
-              placeholder={
-                password ? "Подтвердите новый пароль" : ""
-              }
+              placeholder={password ? "Подтвердите новый пароль" : ""}
               register={register("confirmPassword")}
               error={errors.confirmPassword}
             />
