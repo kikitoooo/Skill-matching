@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch } from "../features/store";
 import { checkUserAuth, getUser } from "../features/slices/userSlice";
 import { fetchResumes } from "../features/slices/resumeSlice";
@@ -21,7 +21,6 @@ import "../index.css";
 export const App = () => {
   ScrollToTop();
   const location = useLocation();
-  const navigate = useNavigate();
   const backgroundLocation = location.state?.background;
   const dispatch = useDispatch();
 
@@ -31,9 +30,6 @@ export const App = () => {
     dispatch(fetchResumes());
   }, [dispatch]);
 
-  const onClose = () => {
-    navigate(-1);
-  };
   return (
     <>
       <div className={styles.app}>
@@ -69,9 +65,9 @@ export const App = () => {
             <Route
               path="/profile"
               element={
-                // <ProtectedRoute>
+                <ProtectedRoute>
                   <ProfilePage />
-                // </ProtectedRoute>
+                </ProtectedRoute>
               }
             >
               <Route index element={<Dashboard />} />

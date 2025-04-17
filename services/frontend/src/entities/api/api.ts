@@ -132,12 +132,16 @@ type TResumesResponse = TServerResponse<{
   resumes: TResume[];
 }>;
 
-export const uploadResumeApi = async (file: File) => {
+export const uploadResumeApi = async (resume_file: File) => {
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append("resume_file", resume_file);
 
   const response = await fetch(`${URL}/resume/`, {
     method: "POST",
+    headers: {
+      // "Content-Type": "application/json;charset=utf-8",
+      authorization: `Bearer ${getCookie("accessToken")}`,
+    },
     body: formData,
   });
 

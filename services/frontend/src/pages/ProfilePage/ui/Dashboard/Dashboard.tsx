@@ -1,10 +1,17 @@
 import { useSelector } from "../../../../features/store";
 import { selectUser } from "../../../../features/slices/userSlice";
 import styles from "./Dashboard.module.scss";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
   const user = useSelector(selectUser);
   const resumes = user?.resumes || [];
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("Резюме обновились:", resumes);
+  }, [resumes]);
 
   // статистика
   const processedResumes = resumes.length;
@@ -19,6 +26,10 @@ export const Dashboard = () => {
   const sortedResumes = [...resumes].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
+
+  const handleRowClick = (resumeId: number) => {
+    navigate(`/resumes/${resumeId}`);
+  };
 
   return (
     <div className={styles.dashboard}>
@@ -57,25 +68,29 @@ export const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {sortedResumes.slice(0, 5).map((resume) => (
-                <tr key={resume.id}>
-                  <td>{resume.candidat_name}</td>
-                  <td>{resume.appropriate_position}</td>
+              {sortedResumes.map((resume) => (
+                <tr 
+                  key={resume.id}
+                  onClick={() => handleRowClick(resume.id)}
+                  className={styles.clickableRow}
+                >
+                  <td>{resume.name}</td>
+                  <td>{resume.job}</td>
                   <td>{new Date(resume.date).toLocaleDateString()}</td>
                   <td>
                     <span
                       className={
-                        resume.matchPercentage >= 70
+                        resume.matchPercentage >= 50
                           ? styles.statusVerified
                           : styles.statusErrorCheck
                       }
                     >
-                      {resume.matchPercentage >= 70
+                      {resume.matchPercentage >= 50
                         ? "Успешно проверено"
                         : "Ошибка анализа"}
                     </span>
                   </td>
-                  <td className="percent">{resume.matchPercentage}%</td>
+                  <td className="percent">{Math.round(resume.matchPercentage)}%</td>
                 </tr>
               ))}
             </tbody>

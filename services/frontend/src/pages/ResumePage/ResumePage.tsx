@@ -8,7 +8,7 @@ import { ReturnButton } from "./ui/ReturnButton";
 import { ResumeHeading } from "./ui/ResumeHeading";
 import { MatchInfo } from "./ui/MatchInfo";
 import { MissingSkills } from "./ui/MissingSkills";
-import { Recommendations } from "./ui/Recommendations/Recommendations";
+import { Skills } from "./ui/Skills/Skills";
 import styles from "./ResumePage.module.scss";
 
 export const ResumePage = () => {
@@ -38,7 +38,7 @@ export const ResumePage = () => {
     <main className={styles.container}>
       <section className={styles.resume_section}>
         <ReturnButton onClick={onBack} />
-        <ResumeHeading date={resume.date} fileName={resume.fileName} />
+        <ResumeHeading date={resume.date} fileName={resume.file_name} />
         <div className={styles.match}>
           <h2 className={styles.heading}>Найденные навыки</h2>
           <div className={styles.chart_wrapper}>
@@ -46,12 +46,12 @@ export const ResumePage = () => {
           </div>
         </div>
         <MatchInfo
-          name={resume.candidat_name}
+          name={resume.name}
           percentage={resume.matchPercentage}
-          position={resume.appropriate_position}
+          position={resume.job}
         />
         <MissingSkills skills={resume.missing_skills} />
-        <Recommendations recommendations={resume.recommendations} />
+        <Skills skills={resume.skills} />
       </section>
     </main>
   );

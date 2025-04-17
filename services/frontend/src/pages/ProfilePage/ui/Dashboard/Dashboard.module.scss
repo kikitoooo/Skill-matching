@@ -103,3 +103,17 @@ td:nth-child(5) {
 th:nth-child(5) {
   text-align: center;
 }
+
+.clickableRow {
+  cursor: pointer;
+}
+
+.statusVerified {
+  color: #38a169;
+  font-weight: 500;
+}
+
+.statusErrorCheck {
+  color: #e53e3e;
+  font-weight: 500;
+}

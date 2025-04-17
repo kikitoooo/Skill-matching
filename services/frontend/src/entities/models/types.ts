@@ -5,16 +5,14 @@ export type TSkill = {
 
 export type TResume = {
   id: number;
-  candidat_name: string;
+  name: string;
   resume_file?: File;
-  fileName: string;
+  file_name: string;
   date: string;
   skills: TSkill[];
-  education?: string;
-  appropriate_position: string;
+  job: string;
   matchPercentage: number;
   missing_skills: string[];
-  recommendations: string[];
 };
 
 export type TUser = {

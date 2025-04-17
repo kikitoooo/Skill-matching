@@ -172,7 +172,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = action.payload.user;
         state.error = null;
-      });
+      })
   },
 });
 
