@@ -45,13 +45,13 @@ export const ResumePage = () => {
             <SkillDiagram resume={resume} />
           </div>
         </div>
+        <Skills skills={resume.skills} />
         <MatchInfo
           name={resume.name}
-          percentage={resume.matchPercentage}
+          percentage={Math.round(resume.matchPercentage)}
           position={resume.job}
         />
         <MissingSkills skills={resume.missing_skills} />
-        <Skills skills={resume.skills} />
       </section>
     </main>
   );

@@ -10,7 +10,6 @@ import { LoginPage } from "../pages/LoginPage";
 import { RegistrationPage } from "../pages/RegistrationPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { ResumePage } from "../pages/ResumePage";
-import { TestResumePage } from "../pages/TestResumePage";
 import { ProfilePage } from "../pages/ProfilePage";
 import { Dashboard } from "../pages/ProfilePage/ui/Dashboard";
 import { EditProfilePage } from "../pages/ProfilePage/ui/EditProfilePage";
@@ -60,8 +59,14 @@ export const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="/resumes" element={<TestResumePage />} />
-            <Route path="/resumes/:id" element={<ResumePage />} />
+            <Route
+              path="/resumes/:id"
+              element={
+                <ProtectedRoute>
+                  <ResumePage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/profile"
               element={

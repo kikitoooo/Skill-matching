@@ -125,7 +125,7 @@ export const logoutApi = () =>
   });
 
 type TResumeResponse = TServerResponse<{
-  resume: TResume;
+  data: TResume;
 }>;
 
 type TResumesResponse = TServerResponse<{
@@ -146,7 +146,7 @@ export const uploadResumeApi = async (resume_file: File) => {
   });
 
   return checkResponse<TResumeResponse>(response).then((data) => {
-    if (data?.success) return data.resume;
+    if (data?.success) return data.data;
     return Promise.reject(data);
   });
 };

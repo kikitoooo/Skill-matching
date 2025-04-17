@@ -16,9 +16,15 @@ const initialState: TResumesState = {
 
 export const analyzeResume = createAsyncThunk(
   "resumes/analyzeResume",
-  async (file: File) => {
-    const result = await uploadResumeApi(file);
-    return result;
+  async (file: File, { rejectWithValue }) => {
+    try {
+      const result = await uploadResumeApi(file);
+      return result;
+    } catch (err: any) {
+      const message =
+        typeof err === "string" ? err : err?.message || "Ошибка анализа резюме";
+      return rejectWithValue(message);
+    }
   }
 );
 

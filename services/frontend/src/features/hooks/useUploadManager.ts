@@ -71,7 +71,8 @@ export const useUploadManager = () => {
 
       const result = await dispatch(analyzeResume(selectedFile)).unwrap();
 
-      if (!result) {
+      // Исправленная проверка ответа
+      if (!result.job || Object.keys(result.skills).length === 0) {
         throw new Error("Невозможно извлечь данные из резюме.");
       }
 
@@ -91,7 +92,10 @@ export const useUploadManager = () => {
         },
       ]);
     } catch (error: any) {
-      const errorMessage = error?.message ?? "";
+      const errorMessage =
+        typeof error === "string"
+          ? error
+          : error?.message || "Неизвестная ошибка";
 
       setNotifications((prev) => [
         ...prev,
