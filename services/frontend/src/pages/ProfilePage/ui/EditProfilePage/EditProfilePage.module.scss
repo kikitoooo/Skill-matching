@@ -3,15 +3,18 @@
   border-radius: 8px;
   padding: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 1rem 1rem;
-  width: 100%;
+  margin: 0 auto;
   max-width: 1240px;
 }
 
 h2 {
   margin-bottom: 1.5rem;
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: clamp(1rem, 0.7975rem + 1.0127vw, 2rem);
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  text-align: center;
 }
 
 .form {
@@ -22,26 +25,22 @@ h2 {
 .formColumns {
   display: flex;
   justify-content: center;
-  gap: 8rem;
+  align-items: flex-end;
+  gap: 4rem;
   width: 100%;
-  margin: 2rem;
 }
 
 .leftColumn,
 .rightColumn {
-  flex: 1;
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
+  align-items: center;
 }
 
 .leftColumn {
   margin-top: 30px;
-}
-
-.formGroup {
-  width: 100%;
 }
 
 label {
@@ -52,7 +51,7 @@ label {
 }
 
 input {
-  width: 100%;
+  width: max-content;
   box-sizing: border-box;
   padding: 0.75rem 1rem;
   border: 1px solid #e2e8f0;
@@ -61,13 +60,13 @@ input {
   transition: all 0.2s;
   color: #2d3748;
   border-color: #9f7aea;
-  
+
   &:focus {
     border-color: #9f7aea;
     box-shadow: 0 0 0 3px rgba(159, 122, 234, 0.2);
     outline: none;
   }
-  
+
   &:disabled {
     background-color: #f8fafc;
     color: #718096;
@@ -76,7 +75,7 @@ input {
 
 .mainButton {
   display: block;
-  width: 100%;
+  width: 70%;
   max-width: 300px;
   margin: 3rem auto 0;
   padding: 0.875rem 1rem;
@@ -85,33 +84,13 @@ input {
   transition: all 0.2s;
 }
 
-@media (max-width: 768px) {
-  .editProfile {
-    padding: 1.5rem;
-  }
-
-  .formColumns {
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-  }
-
-  .leftColumn,
-  .rightColumn {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .mainButton {
-    max-width: 100%;
-  }
-}
-
 .avatarContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 1.5rem;
+  width: max-content;
+  align-self: center;
 }
 
 .avatarWrapper {
@@ -154,4 +133,42 @@ input {
   width: 100%;
   max-width: 400px;
   padding: 0 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .editProfile {
+    padding: 1.5rem;
+  }
+
+  .formColumns {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .leftColumn,
+  .rightColumn {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .mainButton {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .formColumns {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 8rem;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .formColumns {
+    gap: 12rem;
+  }
 }

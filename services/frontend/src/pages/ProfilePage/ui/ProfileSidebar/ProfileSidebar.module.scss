@@ -1,9 +1,10 @@
 .sidebar {
   width: 260px;
   background-color: #fff;
-  padding: 24px 16px;
+  padding: 2rem 1.5rem;
   height: 100%;
   box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.05);
+  align-self: center;
 }
 
 .userInfo {
@@ -69,16 +70,16 @@
   text-decoration: none;
   transition: all 0.2s;
   font-size: 15px;
-  
+
   &:hover {
     background-color: #f3e8ff;
     color: #6b46c1;
-    
+
     svg {
       color: #6b46c1;
     }
   }
-  
+
   svg {
     width: 20px;
     height: 20px;
@@ -92,9 +93,9 @@
   color: #6b46c1;
   font-weight: 500;
   position: relative;
-  
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0;
@@ -103,8 +104,15 @@
     background-color: #8d2ccd;
     border-radius: 0 4px 4px 0;
   }
-  
+
   svg {
     color: #6b46c1;
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    padding: 24px 16px;
+    align-self: auto;
   }
 }
