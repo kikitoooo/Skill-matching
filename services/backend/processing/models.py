@@ -2,9 +2,9 @@ from django.db import models
 from users.models import CustomUser
 
 class Resume(models.Model):
-    first_name = models.CharField('first_name', max_length=150)
+    first_name = models.CharField('first_name', max_length=150, blank=True, null=True)
     patronymic_name = models.CharField('patronymic_name', max_length=150, blank=True, null=True)
-    surname = models.CharField(max_length=150)
+    surname = models.CharField(max_length=150, blank=True, null=True)
     job = models.CharField(max_length=156, blank=True, null=True)
     skills = models.JSONField(verbose_name='Перечень навыков', blank=True, null=True)
     resume_file = models.FileField(upload_to='resumes/')

@@ -26,3 +26,5 @@ media/
 
 services/backend/processing/migrations
 services/backend/users/migrations
+
+*.pth

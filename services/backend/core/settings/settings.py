@@ -137,3 +137,5 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=100),
     'BLACKLIST_AFTER_ROTATION': True,
 }
+
+ML_MODEL_DIR = os.path.join(BASE_DIR, 'model_artifacts')

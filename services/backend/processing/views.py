@@ -2,16 +2,17 @@ from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from core.serializers import (CookieTokenRefreshSerializer, ResumeCreateSerializer,
-                              ResumeSerializer, VacancyCreateSerializer, VacancySerializer)
+                              ResumeSerializer, VacancyCreateSerializer,
+                              VacancySerializer, JobMatchingSerializer)
 from rest_framework import status, viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.mixins import UpdateModelMixin, DestroyModelMixin, RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.generics import RetrieveUpdateAPIView
 
-from .models import CustomUser, Resume, Vacancy
+from .models import CustomUser, Resume, Vacancy, JobMatching
 from core.serializers import UserWithResumesSerializer
-from core.permissions import IsOwnerOrSuperuser
+
 
 
 class CookieTokenObtainPairView(TokenObtainPairView):
@@ -129,3 +130,12 @@ class VacancyViewSet(viewsets.ModelViewSet, RetrieveModelMixin, UpdateModelMixin
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class JobMatchingViewSet(viewsets.ModelViewSet):
+    queryset = JobMatching.objects.all()
+    serializer_class = JobMatchingSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

@@ -33,7 +33,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField('email', max_length=254, unique=True)
     email_confirmed = models.BooleanField(default=False)
     lastName = models.CharField('lastName', max_length=150, null=True, blank=True)
-    image = models.TextField(max_length=1024, null=True, blank=True)
+    image = models.JSONField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 

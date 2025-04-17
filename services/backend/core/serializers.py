@@ -8,6 +8,7 @@ from rest_framework_simplejwt.exceptions import InvalidToken
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 
 from core.parsers.resume_parser import ResumeParser
+from core.ml_service import skill_extractor
 
 
 class CookieTokenRefreshSerializer(TokenRefreshSerializer):
@@ -89,9 +90,11 @@ class ResumeCreateSerializer(serializers.ModelSerializer):
         if uploaded_file:
             try:
                 parsed_resume = ResumeParser.parse_file(uploaded_file)
+                skills = skill_extractor.extract_skills(parsed_resume)
                 resume = Resume.objects.create(
                     **validated_data,
-                    parsed_resume=parsed_resume
+                    parsed_resume=parsed_resume,
+                    skills=skills
                 )
                 return resume
             except Exception as e:
@@ -161,11 +164,4 @@ class JobMatchingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = JobMatching
-        fields = [
-            'id',
-            'name',
-            'description',
-            'required_skills',
-            'created_at',
-            'updated_at',
-        ]
+        fields = ['id', 'user', 'vacancy', 'resume', 'match', 'shortage', 'created_at']

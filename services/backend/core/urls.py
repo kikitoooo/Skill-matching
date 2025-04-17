@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from processing.views import (CookieTokenObtainPairView, CookieTokenRefreshView, UserProfileApiWiew,
-                              ResumeViewSet, VacancyViewSet)
+                              ResumeViewSet, VacancyViewSet, JobMatchingViewSet)
 from rest_framework.routers import DefaultRouter
 
 from users.views import UserLoginAPIView, UserLogoutAPIView, UserRegistrationAPIView
@@ -33,6 +33,9 @@ router.register(r'vacancy',
                 VacancyViewSet,
                 basename='vacancy'
                 )
+router.register(r'job-matching',
+                JobMatchingViewSet,
+                basename='job_matching')
 
 urlpatterns = [
     path('user-info/', UserProfileApiWiew.as_view(), name='user-info'),
