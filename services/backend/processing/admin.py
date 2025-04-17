@@ -1,13 +1,11 @@
 from django.contrib import admin
 from processing.models import Resume, Vacancy, JobMatching
 
-
+'''
 @admin.register(Resume)
 class ResumeAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'surname', 'job', 'skills', 'resume_file', 'created_at']
-    search_fields = ['first_name', 'surname', 'job']
-    list_filter = ['patronymic_name']
-    ordering = ['patronymic_name']
+    list_display = ['job', 'skills', 'resume_file', 'date']
+    search_fields = ['job']
 
 
 @admin.register(Vacancy)
@@ -20,8 +18,9 @@ class VacancyAdmin(admin.ModelAdmin):
 
 @admin.register(JobMatching)
 class JobMatchingAdmin(admin.ModelAdmin):
-    list_display = ['user', 'vacancy', 'resume', 'match', 'shortage', 'created_at']
+    list_display = ['user', 'vacancy', 'resume', 'match', 'shortage', 'date']
     search_fields = ['id']
     list_filter = ['id']
     ordering = ['id']
+    '''
 # Register your models here.
