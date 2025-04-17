@@ -94,7 +94,11 @@ class ResumeViewSet(viewsets.ModelViewSet):
         serializer = ResumeCreateSerializer(data=request.data, context=self.get_serializer_context())
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            data = {
+                "success": True,
+                "data": serializer.data,
+            }   
+            return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
