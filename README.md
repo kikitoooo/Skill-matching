@@ -1,5 +1,5 @@
 # 📌 Skill-MatCher: Автоматизированный анализ компетенций IT-специалистов  
-**✨ Цифровая платформа для рекрутеров с AI-анализом резюме**  
+**Цифровая платформа для рекрутеров с AI-анализом резюме**  
 
 ---
 
@@ -80,8 +80,7 @@
    ```
 3. **Запуск:**  
    - Frontend: `npm run dev` (Vite).  
-   - Backend: `python manage.py runserver`.  
-   - ML-сервис: Запуск через Docker (конфигурация в `ml_service/`).  
+   - Backend: `python manage.py runserver`.   
 
 ---
 
