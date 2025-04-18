@@ -28,7 +28,7 @@ export const SkillDiagram: React.FC<SkillDiagramProps> = ({ resume }) => {
         }))
   ).map((skill, index) => ({
     ...skill,
-    indexLabel: index + 1, // добавим поле для отображения на оси X
+    indexLabel: index + 1,
   }));
   const getColorByLevel = (level: number) => {
     if (level >= 80) return "#28a745";
@@ -41,7 +41,7 @@ export const SkillDiagram: React.FC<SkillDiagramProps> = ({ resume }) => {
       <BarChart
         data={normalizedSkills}
         layout="horizontal"
-        margin={{ top: 10, bottom: 10, left: -30, right: 5 }}
+        margin={{ top: 10, bottom: -20, left: -30, right: 5 }}
       >
         <CartesianGrid stroke="rgb(22, 34, 151, 0.5)" strokeDasharray="3 3" />
         <XAxis

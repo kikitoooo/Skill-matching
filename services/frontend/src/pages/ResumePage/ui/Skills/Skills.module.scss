@@ -8,7 +8,7 @@
   width: fit-content;
 }
 
-.recommendations {
+.skills {
   align-self: flex-start;
   display: flex;
   flex-direction: column;
@@ -21,8 +21,6 @@
 
     li {
       padding: 0.5rem 1rem;
-      display: flex;
-      align-items: center;
       font-weight: 400;
       font-size: clamp(1rem, 0.8481rem + 0.7595vw, 1.75rem);
       line-height: 1.5;

@@ -14,11 +14,19 @@ export const Skills = ({
       }));
 
   return (
-    <div className={styles.recommendations}>
+    <div className={styles.skills}>
       <h2 className={styles.heading}>Навыки:</h2>
       <ul>
         {normalizedSkills.map((skill, index) => (
-          <li key={index}>📌 {skill.name}</li>
+          <li key={index}>
+            📌 {index + 1}
+            {`) `} {skill.name}
+            {" - "}
+            <strong>
+              {skill.level}
+              {`%`}
+            </strong>
+          </li>
         ))}
       </ul>
     </div>

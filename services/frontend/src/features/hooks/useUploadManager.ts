@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "../store";
 import { analyzeResume } from "../slices/resumeSlice";
 import { v4 as uuidv4 } from "uuid";
+import { getUser } from "../slices/userSlice";
 
 export type UploadStatus = "uploading" | "done";
 export type NotificationType = "success" | "warning" | "error";
@@ -70,8 +71,8 @@ export const useUploadManager = () => {
       );
 
       const result = await dispatch(analyzeResume(selectedFile)).unwrap();
+      dispatch(getUser());
 
-      // Исправленная проверка ответа
       if (!result.job || Object.keys(result.skills).length === 0) {
         throw new Error("Невозможно извлечь данные из резюме.");
       }
